@@ -1,0 +1,33 @@
+{
+  "restaurantName": "Galetus",
+  "tagline": "Grill e Pizza",
+  "address": "R. Regueira Costa, 80 - Rosarinho, Recife - PE, 52041-050",
+  "phone": "(81) 3015-5777",
+  "whatsapp": "558130155777",
+  "instagram": "@galetus",
+  "restaurantType": [
+    "hamburgueria",
+    "regional",
+    "executivo",
+    "bistro"
+  ],
+  "operationMode": [
+    "salao"
+  ],
+  "visualReference": "Mesas de madeira, paredes de pedra, retroiluminacao com luz amarela e sensacao sofisticada. Fardas pretas e vermelhas. Lugar para almoco depois do trabalho, pizza em familia, chopp gelado com amigos no fim de semana e clima de dia de jogo.",
+  "preferredStyle": "regional_rustico",
+  "preferredPalette": {
+    "primary": "#8B1017",
+    "secondary": "#F6F1EC",
+    "accent": "#F1EDE8"
+  },
+  "modules": {
+    "dailySpecial": true,
+    "featuredItems": true,
+    "combos": true,
+    "qrStackSignature": true
+  },
+  "openingHours": "Todos os dias, almoço e jantar",
+  "bannerImage": "",
+  "logoImage": ""
+}

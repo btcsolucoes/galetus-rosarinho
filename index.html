@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galetus | Cardápio</title>
+  <meta name="description" content="Cardápio digital da Galetus Rosarinho.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="site-shell">
+    <header class="hero reveal" id="top">
+      <div class="hero-glow"></div>
+      <div class="container hero-grid">
+        <section class="hero-copy">
+          <div class="brand-lockup">
+            <div class="brand-mark" id="brand-mark" aria-hidden="true"></div>
+            <div>
+              <p class="eyebrow" id="hero-kicker">Rosarinho</p>
+              <h1 id="restaurant-name">Carregando</h1>
+            </div>
+          </div>
+
+          <p class="hero-tagline" id="restaurant-tagline"></p>
+          <p class="hero-description" id="restaurant-description"></p>
+
+          <div class="hero-actions" id="hero-actions"></div>
+
+          <div class="hero-facts">
+            <article class="hero-fact">
+              <span class="fact-label">Endereço</span>
+              <strong id="restaurant-address"></strong>
+            </article>
+            <article class="hero-fact">
+              <span class="fact-label">Contato</span>
+              <strong id="restaurant-contact"></strong>
+            </article>
+          </div>
+
+          <div class="hero-badges" id="operation-badges"></div>
+        </section>
+
+        <aside class="hero-card">
+          <span class="hero-card-kicker" id="preset-label">Galetus</span>
+          <h2 id="hero-card-title">Churrasco, pizza e salão para reunir.</h2>
+          <p id="hero-card-copy"></p>
+          <div class="hero-card-media">
+            <img id="hero-banner" src="assets/placeholders/banner-generic.svg" alt="Banner principal" loading="eager">
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <nav class="sticky-nav">
+      <div class="container sticky-nav-inner">
+        <div class="sticky-caption">
+          <span>Navegação</span>
+        </div>
+        <div class="category-chips" id="category-chips"></div>
+      </div>
+    </nav>
+
+    <main class="container page">
+      <section class="control-panel reveal">
+        <div class="section-head compact">
+          <span class="section-kicker">Busca e filtros</span>
+          <h2>Navegue como um cliente real</h2>
+        </div>
+        <div class="control-grid">
+          <label class="field field-search">
+            <span>Buscar item</span>
+            <input type="search" id="search-input" placeholder="Ex.: burger, pizza, executivo, chopp">
+          </label>
+
+          <label class="field">
+            <span>Filtrar categoria</span>
+            <select id="category-select">
+              <option value="all">Todas as categorias</option>
+            </select>
+          </label>
+
+          <label class="toggle-pill">
+            <input type="checkbox" id="special-filter">
+            <span>Somente especiais</span>
+          </label>
+        </div>
+      </section>
+
+      <section class="special-module reveal" id="daily-special-module" hidden>
+        <div class="section-head">
+          <span class="section-kicker" id="daily-special-kicker">Especial do dia</span>
+          <h2 id="daily-special-title">Prato do dia</h2>
+          <p id="daily-special-copy"></p>
+        </div>
+        <div class="daily-special-card" id="daily-special-card"></div>
+      </section>
+
+      <section class="highlight-module reveal" id="featured-module" hidden>
+        <div class="section-head">
+          <span class="section-kicker">Curadoria comercial</span>
+          <h2>Destaques da casa</h2>
+          <p>Seleções pensadas para facilitar a escolha entre almoço, encontro em família e chope com petisco.</p>
+        </div>
+        <div class="highlight-grid" id="highlight-grid"></div>
+      </section>
+
+      <section class="menu-stage" id="menu-stage"></section>
+
+      <section class="empty-state" id="empty-state" hidden>
+        <div class="empty-card">
+          <h2>Nenhum item encontrado</h2>
+          <p>Remova alguns filtros ou altere a busca para visualizar mais itens do cardápio.</p>
+          <button class="ghost-button" id="reset-filters" type="button">Limpar filtros</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer reveal">
+      <div class="container footer-grid">
+        <div>
+          <span class="section-kicker">Institucional</span>
+          <h2 id="footer-name">Restaurante</h2>
+          <p id="footer-address"></p>
+          <p id="footer-phone"></p>
+        </div>
+        <div class="footer-links">
+          <a id="footer-whatsapp" href="#" target="_blank" rel="noreferrer">WhatsApp</a>
+          <a id="footer-instagram" href="#" target="_blank" rel="noreferrer">Instagram</a>
+          <a href="#top">Voltar ao topo</a>
+        </div>
+        <div class="footer-note">
+          <p id="footer-copy"></p>
+          <p id="qrstack-signature">Desenvolvido por QrStack</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <template id="menu-card-template">
+    <article class="menu-card reveal">
+      <div class="menu-image-wrap">
+        <img class="menu-image" src="assets/placeholders/fallback-dish.svg" alt="" loading="lazy">
+        <div class="menu-badges"></div>
+      </div>
+      <div class="menu-body">
+        <div class="menu-copy">
+          <h3 class="menu-title"></h3>
+          <p class="menu-description"></p>
+        </div>
+        <div class="menu-meta"></div>
+        <div class="menu-footer">
+          <div class="menu-prices">
+            <span class="menu-price"></span>
+            <span class="menu-price-old"></span>
+          </div>
+          <a class="menu-action" href="#" target="_blank" rel="noreferrer">Consultar</a>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
