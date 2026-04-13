@@ -1,155 +1,765 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Galetus | Cardápio</title>
-  <meta
-    name="description"
-    content="Cardápio digital da Galetus Rosarinho, com almoço, grill, pizza, chope e especial do dia."
-  >
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Galetus Rosarinho</title>
+  <meta name="description" content="Cardápio digital do Galetus Rosarinho" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap"
-    rel="stylesheet"
-  >
-  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --text: #2c1b14;
+      --muted: #6b584b;
+      --brand: #8f4b2d;
+      --brand-2: #b86031;
+      --gold: #d8a24d;
+      --olive: #7b8f52;
+      --olive-soft: rgba(123, 143, 82, 0.12);
+      --shadow: 0 16px 40px rgba(70, 39, 20, 0.11);
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(216, 162, 77, 0.10), transparent 26%),
+        radial-gradient(circle at top right, rgba(184, 96, 49, 0.10), transparent 22%),
+        linear-gradient(180deg, #f4eadf 0%, #f7f1e8 24%, #fbf7f2 100%);
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
+
+    .hero-wrap { padding: 28px 0 18px; }
+    .hero {
+      min-height: 560px;
+      position: relative;
+      overflow: hidden;
+      min-height: 520px;
+      border-radius: 34px;
+      background:
+        linear-gradient(110deg, rgba(30,18,12,0.74), rgba(30,18,12,0.42)),
+        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      box-shadow: var(--shadow);
+      display: grid;
+      align-items: end;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.18) 34%, rgba(0,0,0,0.50) 100%),
+        radial-gradient(circle at 16% 18%, rgba(216, 162, 77, 0.18), transparent 20%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 48px;
+      max-width: 860px;
+    }
+    .brand-block {
+      display: inline-flex;
+      align-items: center;
+      gap: 18px;
+      padding: 14px 18px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(12px);
+      margin-bottom: 20px;
+    }
+    .brand-logo {
+      width: 118px;
+      height: 118px;
+      object-fit: contain;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.94);
+      padding: 10px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+    }
+    .brand-copy small {
+      display: block;
+      color: rgba(255,255,255,0.82);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      margin-bottom: 8px;
+    }
+    .brand-copy strong {
+      display: block;
+      font-size: clamp(1.8rem, 3vw, 2.7rem);
+      line-height: 1;
+      color: #fff;
+      font-family: 'Playfair Display', serif;
+    }
+    .hero h1 {
+      margin: 0 0 14px;
+      font-family: 'Playfair Display', serif;
+      color: #fff;
+      font-size: clamp(2.4rem, 5vw, 4.8rem);
+      line-height: 0.96;
+      letter-spacing: -0.03em;
+      max-width: 11ch;
+    }
+    .hero p {
+      margin: 0;
+      max-width: 58ch;
+      color: rgba(255,255,255,0.90);
+      font-size: clamp(1rem, 1.6vw, 1.12rem);
+      line-height: 1.75;
+    }
+    .hero-meta {
+      margin-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 24px;
+      color: rgba(255,255,255,0.88);
+      font-size: 0.96rem;
+    }
+    .hero-meta span::before { content: '•'; margin-right: 10px; color: var(--gold); }
+
+    .section-nav-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(14px);
+      background: rgba(247, 241, 232, 0.82);
+      border-bottom: 1px solid rgba(94, 58, 34, 0.08);
+    }
+    .section-nav {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding: 14px 0;
+      scrollbar-width: none;
+    }
+    .section-nav::-webkit-scrollbar { display: none; }
+    .section-nav a {
+      white-space: nowrap;
+      padding: 11px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(94, 58, 34, 0.10);
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: 0.25s ease;
+    }
+    .section-nav a:hover,
+    .section-nav a.active {
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      color: #fff;
+      border-color: transparent;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 20px rgba(143, 75, 45, 0.18);
+    }
+
+    .content { padding: 26px 0 70px; }
+    .section {
+      margin-top: 32px;
+      padding: 28px;
+      border-radius: 32px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.86), rgba(255,251,246,0.95));
+      border: 1px solid rgba(94, 58, 34, 0.08);
+      box-shadow: 0 12px 32px rgba(80, 47, 25, 0.06);
+    }
+    .section-header {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 22px;
+      align-items: center;
+      margin-bottom: 26px;
+    }
+    .section-kicker {
+      display: inline-block;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: var(--olive-soft);
+      color: var(--olive);
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .section h2 {
+      margin: 0 0 10px;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.9rem, 3vw, 2.8rem);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+    .section p.lead {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 58ch;
+    }
+    .section-banner {
+      min-height: 180px;
+      border-radius: 24px;
+      background-size: cover;
+      background-position: center;
+      box-shadow: inset 0 -80px 120px rgba(0,0,0,0.18);
+    }
+    .banner-pizzas { background-image: linear-gradient(120deg, rgba(88,38,17,.18), rgba(0,0,0,.08)), url('https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1200&q=80'); }
+    .banner-galetos { background-image: linear-gradient(120deg, rgba(88,38,17,.18), rgba(0,0,0,.08)), url('https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&w=1200&q=80'); }
+    .banner-pratos { background-image: linear-gradient(120deg, rgba(88,38,17,.18), rgba(0,0,0,.08)), url('https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80'); }
+    .banner-bebidas { background-image: linear-gradient(120deg, rgba(88,38,17,.18), rgba(0,0,0,.08)), url('https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=1200&q=80'); }
+    .banner-doces { background-image: linear-gradient(120deg, rgba(88,38,17,.18), rgba(0,0,0,.08)), url('https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=1200&q=80'); }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .item {
+      min-height: 100%;
+      position: relative;
+      overflow: hidden;
+      padding: 18px 18px 18px 20px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,248,240,0.98));
+      border: 1px solid rgba(94, 58, 34, 0.08);
+      box-shadow: 0 10px 20px rgba(80, 47, 25, 0.05);
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    }
+    .item::before {
+      content: '';
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 5px;
+      border-radius: 10px;
+      background: linear-gradient(180deg, var(--gold), var(--brand-2));
+      opacity: 0.92;
+    }
+    .item::after {
+      content: '';
+      position: absolute;
+      inset: auto -30px -30px auto;
+      width: 110px;
+      height: 110px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(216,162,77,0.10), transparent 68%);
+      pointer-events: none;
+    }
+    .item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 28px rgba(80, 47, 25, 0.10);
+      border-color: rgba(184, 96, 49, 0.16);
+    }
+    .item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 18px;
+      margin-bottom: 8px;
+    }
+    .item h3 {
+      margin: 0;
+      font-size: 1.05rem;
+      line-height: 1.35;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+    .item .price {
+      flex-shrink: 0;
+      padding: 8px 11px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(216,162,77,0.18), rgba(184,96,49,0.14));
+      color: var(--brand);
+      font-weight: 800;
+      font-size: 0.98rem;
+      white-space: nowrap;
+    }
+    .item p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 0.95rem;
+    }
+    .item-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(123, 143, 82, 0.09);
+      color: var(--olive);
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    .price-note {
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(216,162,77,0.12), rgba(184,96,49,0.08));
+      border: 1px solid rgba(184,96,49,0.10);
+      margin-bottom: 14px;
+      color: var(--brand);
+      font-weight: 700;
+      line-height: 1.7;
+    }
+    .price-note small {
+      display: block;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .footer { padding: 0 0 40px; }
+    .footer-card {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 18px;
+      padding: 24px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, rgba(43,27,20,0.98), rgba(63,39,28,0.96));
+      color: rgba(255,255,255,0.92);
+      box-shadow: var(--shadow);
+    }
+    .footer-card::before {
+      content: '';
+      position: absolute;
+      inset: auto -60px -60px auto;
+      width: 180px;
+      height: 180px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(216,162,77,0.12), transparent 70%);
+    }
+
+    .footer-card h3 {
+      margin: 0 0 10px;
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: #fff;
+    }
+    .footer-card p {
+      margin: 0;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.82);
+    }
+    .contact-list {
+      display: grid;
+      gap: 12px;
+      align-content: center;
+    }
+    .contact-list div {
+      padding: 13px 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+    .contact-list strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #fff;
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .muted-note {
+      font-size: 0.86rem;
+      color: rgba(255,255,255,0.66);
+      margin-top: 14px;
+    }
+
+    @media (max-width: 940px) {
+      .section-header, .menu-grid, .footer-card { grid-template-columns: 1fr; }
+      .hero { min-height: 480px; }
+      .hero-content { padding: 28px; }
+    }
+    @media (max-width: 640px) {
+      .container, .section-nav { width: min(var(--max), calc(100% - 18px)); }
+      .hero-wrap { padding-top: 10px; }
+      .hero { border-radius: 26px; min-height: 460px; }
+      .brand-block { gap: 14px; align-items: center; }
+      .brand-logo { width: 90px; height: 90px; }
+      .hero-content { padding: 22px; }
+      .hero h1 { font-size: 2.3rem; }
+      .section { padding: 18px; border-radius: 24px; }
+      .item { padding: 16px 16px 16px 18px; }
+      .item-top { gap: 12px; }
+      .item .price { font-size: 0.92rem; }
+      #sobremesas .menu-grid[style*="repeat(3"] { grid-template-columns: 1fr !important; }
+    }
+  </style>
 </head>
 <body>
-  <div class="site-shell">
-    <header class="hero reveal" id="top">
-      <div class="hero-glow"></div>
-      <div class="hero-rings" aria-hidden="true"></div>
-      <div class="container hero-grid">
-        <section class="hero-copy">
-          <div class="brand-lockup">
-            <div class="brand-mark" id="brand-mark" aria-hidden="true"></div>
-            <p class="eyebrow" id="hero-kicker">Rosarinho • Recife</p>
-            <h1 id="restaurant-name">Galetus</h1>
+  <div class="hero-wrap">
+    <div class="container">
+      <header class="hero" id="inicio">
+        <div class="hero-content">
+          <div class="brand-block">
+            <img class="brand-logo" src="https://i.ibb.co/spRsL715/Captura-de-tela-2026-04-13-152334.png" alt="Logo do Galetus Rosarinho">
+            <div class="brand-copy">
+              <small>Rosarinho • Recife</small>
+              <strong>Grill e Pizza</strong>
+            </div>
           </div>
-
-          <p class="hero-tagline" id="restaurant-tagline"></p>
-          <p class="hero-description" id="restaurant-description"></p>
-
-          <div class="hero-facts">
-            <article class="hero-fact">
-              <span class="fact-label">Endereço</span>
-              <strong id="restaurant-address"></strong>
-            </article>
-            <article class="hero-fact">
-              <span class="fact-label">Horário</span>
-              <strong id="restaurant-contact"></strong>
-            </article>
+          <h1>Sabor marcante, clima acolhedor e cardápio com presença.</h1>
+          <p>Uma apresentação mais quente, mais apetitosa e mais viva — inspirada na elegância do Amaro, mas adaptada à personalidade do Galetus Rosarinho, com leitura fácil, peso visual melhor distribuído e mais valor percebido em cada seção.</p>
+          <div class="hero-meta">
+            <span>R. Regueira Costa, 80 - Rosarinho, Recife - PE, 52041-050</span>
+            <span>(81) 3015-5777</span>
+            <span>@galetus</span>
           </div>
-
-          <div class="hero-actions" id="hero-actions"></div>
-          <div class="hero-badges" id="operation-badges"></div>
-        </section>
-      </div>
-    </header>
-
-    <nav class="sticky-nav" aria-label="Categorias do cardápio">
-      <div class="container sticky-nav-inner">
-        <div class="category-chips" id="category-chips"></div>
-      </div>
-    </nav>
-
-    <main class="container page">
-      <section class="control-panel reveal">
-        <div class="control-grid">
-          <label class="field field-search">
-            <span>Buscar item</span>
-            <input type="search" id="search-input" placeholder="Ex.: pizza, executivo, burger, chope">
-          </label>
-
-          <label class="field">
-            <span>Filtrar categoria</span>
-            <select id="category-select">
-              <option value="all">Todas as categorias</option>
-            </select>
-          </label>
-
-          <label class="toggle-pill">
-            <input type="checkbox" id="special-filter">
-            <span>Somente especiais</span>
-          </label>
         </div>
-      </section>
-
-      <section class="special-module reveal" id="daily-special-module" hidden>
-        <div class="section-head">
-          <span class="section-kicker" id="daily-special-kicker">Rotação diária</span>
-          <h2 id="daily-special-title">Almoço de Hoje</h2>
-          <p id="daily-special-copy"></p>
-        </div>
-        <div class="daily-special-card" id="daily-special-card"></div>
-      </section>
-
-      <section class="highlight-module reveal" id="featured-module" hidden>
-        <div class="section-head">
-          <span class="section-kicker">Curadoria da casa</span>
-          <h2>Destaques da casa</h2>
-          <p>Seleções pensadas para facilitar a escolha entre almoço, mesa em família e chope com petisco.</p>
-        </div>
-        <div class="highlight-grid" id="highlight-grid"></div>
-      </section>
-
-      <section class="menu-stage" id="menu-stage"></section>
-
-      <section class="empty-state" id="empty-state" hidden>
-        <div class="empty-card">
-          <h2>Nenhum item encontrado</h2>
-          <p>Remova alguns filtros ou altere a busca para visualizar mais itens do cardápio.</p>
-          <button class="ghost-button" id="reset-filters" type="button">Limpar filtros</button>
-        </div>
-      </section>
-    </main>
-
-    <footer class="site-footer reveal">
-      <div class="container footer-grid">
-        <div>
-          <span class="section-kicker">Institucional</span>
-          <h2 id="footer-name">Galetus</h2>
-          <p id="footer-address"></p>
-          <p id="footer-phone"></p>
-        </div>
-        <div class="footer-links">
-          <a id="footer-whatsapp" href="#" target="_blank" rel="noreferrer">WhatsApp</a>
-          <a id="footer-instagram" href="#" target="_blank" rel="noreferrer">Instagram</a>
-          <a href="#top">Voltar ao topo</a>
-        </div>
-        <div class="footer-note">
-          <p id="footer-copy"></p>
-          <p id="qrstack-signature">Desenvolvido por QrStack</p>
-        </div>
-      </div>
-    </footer>
+      </header>
+    </div>
   </div>
 
-  <template id="menu-card-template">
-    <article class="menu-card reveal">
-      <div class="menu-image-wrap">
-        <img class="menu-image" src="assets/placeholders/fallback-dish.svg" alt="" loading="lazy">
-        <div class="menu-badges"></div>
-      </div>
-      <div class="menu-body">
-        <div class="menu-copy">
-          <h3 class="menu-title"></h3>
-          <p class="menu-description"></p>
-        </div>
-        <div class="menu-meta"></div>
-        <div class="menu-footer">
-          <div class="menu-prices">
-            <span class="menu-price"></span>
-            <span class="menu-price-old"></span>
-          </div>
-          <a class="menu-action" href="#" target="_blank" rel="noreferrer">Consultar</a>
-        </div>
-      </div>
-    </article>
-  </template>
+  <div class="section-nav-wrap">
+    <nav class="section-nav" aria-label="Navegação das categorias">
+      <a href="#pizzas-originais" class="active">Pizzas Originais</a>
+      <a href="#pizzas-tradicionais">Pizzas Tradicionais</a>
+      <a href="#pizzas-especiais">Pizzas Especiais</a>
+      <a href="#pizzas-doces">Pizzas Doces</a>
+      <a href="#pratos-individuais">Pratos Individuais</a>
+      <a href="#petiscos">Petiscos Galetus</a>
+      <a href="#classicos">Clássicos Galetus</a>
+      <a href="#familia">Pratos Família</a>
+      <a href="#galetos">Carta de Galetos</a>
+      <a href="#bebidas">Bebidas Geladas</a>
+      <a href="#sobremesas">Sobremesas & Cafés</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </div>
 
-  <script src="script.js" defer></script>
+  <main class="content">
+    <div class="container">
+      <section class="section" id="pizzas-originais">
+        <div class="section-header">
+          <div>
+            <span class="section-kicker">Pizzas</span>
+            <h2>Pizzas Originais</h2>
+            <p class="lead">Sabores clássicos da casa com uma leitura mais elegante, quente e organizada.</p>
+            <div class="price-note">Pequena 4 fatias: R$ 35 | Média 6 fatias: R$ 45 | Grande 8 fatias: R$ 59<small>Borda Catupiry ou Cheddar: adicione R$ 12</small></div>
+          </div>
+          <div class="section-banner banner-pizzas"></div>
+        </div>
+        <div class="menu-grid">
+          <article class="item"><div class="item-top"><h3>Mussarela</h3></div><p>Mussarela, tomate, azeitonas e orégano.</p></article>
+          <article class="item"><div class="item-top"><h3>Napolitana</h3></div><p>Mussarela, tomate, parmesão e orégano.</p></article>
+          <article class="item"><div class="item-top"><h3>Jardineira</h3></div><p>Mussarela, tomate seco, rúcula e orégano.</p></article>
+          <article class="item"><div class="item-top"><h3>Frango</h3></div><p>Mussarela, peito de frango desfiado, tomate, cebola, azeitonas e orégano.</p></article>
+          <article class="item"><div class="item-top"><h3>Romana</h3></div><p>Mussarela, presunto e orégano.</p></article>
+          <article class="item"><div class="item-top"><h3>Margherita</h3></div><p>Mussarela, tomate, parmesão, manjericão e orégano.</p></article>
+          <article class="item"><div class="item-top"><h3>Atum</h3></div><p>Mussarela, atum, tomate, cebola, azeitona e orégano.</p></article>
+          <article class="item"><div class="item-top"><h3>Bacon</h3></div><p>Mussarela, bacon e orégano.</p></article>
+          <article class="item"><div class="item-top"><h3>Brócolis com Alho</h3></div><p>Mussarela com brócolis refogado com alho no azeite e orégano.</p></article>
+        </div>
+      </section>
+
+      <section class="section" id="pizzas-tradicionais">
+        <div class="section-header">
+          <div>
+            <span class="section-kicker">Pizzas</span>
+            <h2>Pizzas Tradicionais</h2>
+            <p class="lead">Mais variedade, mais recheio e mais presença visual na apresentação dos sabores.</p>
+            <div class="price-note">Pequena 4 fatias: R$ 39 | Média 6 fatias: R$ 49 | Grande 8 fatias: R$ 65</div>
+          </div>
+          <div class="section-banner banner-pizzas"></div>
+        </div>
+        <div class="menu-grid">
+          <article class="item"><h3>Portuguesa</h3><p>Mussarela, presunto, cebola, ovos cozidos, azeitonas e orégano.</p></article>
+          <article class="item"><h3>Frango Catupiry</h3><p>Mussarela, peito de frango desfiado, catupiry, azeitonas e orégano.</p></article>
+          <article class="item"><h3>Três Queijos</h3><p>Mussarela, parmesão, catupiry e orégano.</p></article>
+          <article class="item"><h3>Quatro Queijos</h3><p>Mussarela, gorgonzola, parmesão, catupiry e orégano.</p></article>
+          <article class="item"><h3>Calabresa</h3><p>Mussarela, calabresa, cebola, azeitonas e orégano.</p></article>
+          <article class="item"><h3>Nordestina</h3><p>Mussarela, charque desfiada refogada, cebola, queijo coalho e orégano.</p></article>
+          <article class="item"><h3>Romana Catupiry</h3><p>Mussarela, presunto, catupiry e orégano.</p></article>
+          <article class="item"><h3>Mafiosa</h3><p>Mussarela, calabresa, cebola, ovos cozidos, azeitonas e orégano.</p></article>
+          <article class="item"><h3>Fiorentina</h3><p>Mussarela, calabresa, atum e orégano.</p></article>
+          <article class="item"><h3>Florença</h3><p>Mussarela, peito de frango desfiado, tomate seco, azeitonas e orégano.</p></article>
+          <article class="item"><h3>Pepperoni</h3><p>Mussarela, pepperoni e orégano.</p></article>
+        </div>
+      </section>
+
+      <section class="section" id="pizzas-especiais">
+        <div class="section-header">
+          <div>
+            <span class="section-kicker">Pizzas</span>
+            <h2>Pizzas Especiais</h2>
+            <p class="lead">Sabores mais robustos e diferenciados, com leitura premium e apetitosa.</p>
+            <div class="price-note">Pequena 4 fatias: R$ 55 | Média 6 fatias: R$ 65 | Grande 8 fatias: R$ 75</div>
+          </div>
+          <div class="section-banner banner-pizzas"></div>
+        </div>
+        <div class="menu-grid">
+          <article class="item"><h3>Siciliana</h3><p>Mussarela, tomate, bacon, champignon, catupiry, parmesão e manjericão.</p></article>
+          <article class="item"><h3>Camarão Catupiry</h3><p>Mussarela, filé de camarão refogado, catupiry e orégano.</p></article>
+          <article class="item"><h3>Camarão Cream Cheese</h3><p>Mussarela, filé de camarão refogado, cream cheese e orégano.</p></article>
+          <article class="item"><h3>Picanha Barbecue</h3><p>Mussarela, picanha fatiada ao barbecue, cebola e orégano.</p></article>
+          <article class="item"><h3>Venezia</h3><p>Mussarela, presunto, champignon, catupiry e orégano.</p></article>
+          <article class="item"><h3>Americana</h3><p>Mussarela, peito de frango desfiado, presunto, calabresa, palmito, bacon, tomate, azeitonas e orégano.</p></article>
+        </div>
+      </section>
+
+      <section class="section" id="pizzas-doces">
+        <div class="section-header">
+          <div>
+            <span class="section-kicker">Pizzas</span>
+            <h2>Pizzas Doces</h2>
+            <p class="lead">Para fechar com doçura, mantendo o mesmo padrão visual do restante do cardápio.</p>
+            <div class="price-note">Pequena 4 fatias: R$ 25 | Média 6 fatias: R$ 35 | Grande 8 fatias: R$ 45</div>
+          </div>
+          <div class="section-banner banner-doces"></div>
+        </div>
+        <div class="menu-grid">
+          <article class="item"><div class="item-top"><h3>Brigadeiro</h3></div><p>Mussarela e brigadeiro.</p></article>
+          <article class="item"><div class="item-top"><h3>Cartola</h3></div><p>Mussarela, banana, canela em pó e açúcar.</p></article>
+          <article class="item"><div class="item-top"><h3>Romeu e Julieta</h3></div><p>Mussarela e goiabada cremosa.</p></article>
+          <article class="item"><div class="item-top"><h3>Doce de Leite c/ Paçoca</h3></div><p>Mussarela, doce de leite e paçoca.</p></article>
+        </div>
+      </section>
+
+      <section class="section" id="pratos-individuais">
+        <div class="section-header">
+          <div>
+            <span class="section-kicker">Almoço</span>
+            <h2>Pratos Individuais</h2>
+            <p class="lead">Servidos de segunda a sexta. Escolha 2 acompanhamentos: arroz branco, arroz à grega, arroz com brócolis, espaguete ao sugo, salada verde, legumes à julienne, purê de batata, feijão sempre verde, feijão tropeiro, batata frita ou bastões de macaxeira frita.</p>
+          </div>
+          <div class="section-banner banner-pratos"></div>
+        </div>
+        <div class="menu-grid">
+          <article class="item"><div class="item-top"><h3>Galeto</h3><span class="price">R$ 29</span></div></article>
+          <article class="item"><div class="item-top"><h3>Frango Grelhado</h3><span class="price">R$ 29</span></div></article>
+          <article class="item"><div class="item-top"><h3>Carne de Sol</h3><span class="price">R$ 49</span></div></article>
+          <article class="item"><div class="item-top"><h3>Maminha</h3><span class="price">R$ 49</span></div></article>
+          <article class="item"><div class="item-top"><h3>Picanha</h3><span class="price">R$ 65</span></div></article>
+          <article class="item"><div class="item-top"><h3>Filé à Parmegiana</h3><span class="price">R$ 49</span></div></article>
+          <article class="item"><div class="item-top"><h3>Parmegiana de Frango</h3><span class="price">R$ 39</span></div></article>
+          <article class="item"><div class="item-top"><h3>Filé de Peixe Grelhado</h3><span class="price">R$ 45</span></div></article>
+          <article class="item"><div class="item-top"><h3>Peixe ao Molho de Camarão</h3><span class="price">R$ 49</span></div></article>
+          <article class="item"><div class="item-top"><h3>Filé ao Molho Madeira</h3><span class="price">R$ 49</span></div></article>
+        </div>
+      </section>
+
+      <section class="section" id="petiscos">
+        <div class="section-header">
+          <div>
+            <span class="section-kicker">Entradas</span>
+            <h2>Petiscos Galetus</h2>
+            <p class="lead">Petiscos, entradas e acompanhamentos pensados para compartilhar ou abrir o apetite com força.</p>
+          </div>
+          <div class="section-banner banner-galetos"></div>
+        </div>
+        <div class="menu-grid">
+          <article class="item"><div class="item-top"><h3>Caldinho</h3><span class="price">R$ 15</span></div><p>Sabores: camarão, peixe ou feijoada.</p></article>
+          <article class="item"><div class="item-top"><h3>Caldinho de Polvo</h3><span class="price">R$ 20</span></div></article>
+          <article class="item"><div class="item-top"><h3>Filé com Fritas</h3><span class="price">R$ 99</span></div></article>
+          <article class="item"><div class="item-top"><h3>Camarão ao Catupiry</h3><span class="price">R$ 89</span></div></article>
+          <article class="item"><div class="item-top"><h3>Camarão Crocante ao Alho Frito</h3><span class="price">R$ 79</span></div></article>
+          <article class="item"><div class="item-top"><h3>Pão de Alho Delicioso</h3><span class="price">R$ 14</span></div></article>
+          <article class="item"><div class="item-top"><h3>Panceta</h3><span class="price">R$ 49</span></div></article>
+          <article class="item"><div class="item-top"><h3>Camarão ao Alho e Óleo</h3><span class="price">R$ 49</span></div></article>
+          <article class="item"><div class="item-top"><h3>Frango à Passarinha com Fritas</h3><span class="price">R$ 59</span></div></article>
+          <article class="item"><div class="item-top"><h3>Frango com Queijo na Chapa</h3><span class="price">R$ 69</span></div></article>
+          <article class="item"><div class="item-top"><h3>Roda Gigante de Picanha</h3><span class="price">R$ 149</span></div></article>
+          <article class="item"><div class="item-top"><h3>Asinhas na Brasa</h3><span class="price">R$ 4</span></div></article>
+          <article class="item"><div class="item-top"><h3>Pastel de Costela</h3><span class="price">R$ 45</span></div><p>2 unidades.</p></article>
+          <article class="item"><div class="item-top"><h3>Toscana Frango / Suína</h3><span class="price">R$ 12</span></div></article>
+          <article class="item"><div class="item-top"><h3>Asinha Crocante</h3><span class="price">R$ 4</span></div><p>Preço por unidade.</p></article>
+          <article class="item"><div class="item-top"><h3>Croqueta de Cupim</h3><span class="price">R$ 49</span></div></article>
+          <article class="item"><div class="item-top"><h3>Moela Galetus</h3><span class="price">R$ 49</span></div></article>
+          <article class="item"><div class="item-top"><h3>Tripinha Crocante</h3><span class="price">R$ 35</span></div></article>
+        </div>
+      </section>
+
+      <section class="section" id="classicos">
+        <div class="section-header">
+          <div>
+            <span class="section-kicker">Serve bem 2 pessoas</span>
+            <h2>Clássicos Galetus</h2>
+            <p class="lead">Pratos mais robustos da casa, com acompanhamentos generosos e apresentação de maior valor percebido.</p>
+          </div>
+          <div class="section-banner banner-pratos"></div>
+        </div>
+        <div class="menu-grid">
+          <article class="item"><div class="item-top"><h3>Carne de Sol da Casa</h3><span class="price">R$ 139</span></div><p>Carne de sol coberta por queijo coalho assado e manteiga de garrafa, acompanhada de feijão tropeiro, arroz de coentro, bastões de macaxeira frita, purê de jerimum, farofa de macaxeira e vinagrete.</p></article>
+          <article class="item"><div class="item-top"><h3>Maminha Importada Chimichurri</h3><span class="price">R$ 149</span></div><p>Feijão sempre verde, arroz branco, bastões de macaxeira frita, farofa de jerimum, vinagrete e chimichurri.</p></article>
+          <article class="item"><div class="item-top"><h3>Picanha Argentina</h3><span class="price">R$ 169</span></div><p>Feijão tropeiro, arroz branco, bastões de macaxeira frita, farofa crocante de parmesão e vinagrete.</p></article>
+          <article class="item"><div class="item-top"><h3>Peixe ao Molho de Camarão</h3><span class="price">R$ 119</span></div><p>Filé de peixe empanado ao molho de camarão, acompanha arroz branco e purê.</p></article>
+          <article class="item"><div class="item-top"><h3>Peixe à Delícia</h3><span class="price">R$ 119</span></div><p>Filé de peixe ao molho branco com banana frita, acompanha arroz branco e purê.</p></article>
+          <article class="item"><div class="item-top"><h3>Filé à Parmegiana</h3><span class="price">R$ 109</span></div><p>Espaguete, purê e batata frita. Escolha o molho: ao sugo, 4 queijos ou bolonhesa.</p></article>
+          <article class="item"><div class="item-top"><h3>Filé ao Molho Madeira</h3><span class="price">R$ 119</span></div><p>Arroz branco e purê.</p></article>
+          <article class="item"><div class="item-top"><h3>Parmegiana de Frango</h3><span class="price">R$ 89</span></div><p>Espaguete, purê e batata frita. Escolha o molho: ao sugo, 4 queijos ou bolonhesa.</p></article>
+          <article class="item"><div class="item-top"><h3>Baião de Dois</h3><span class="price">R$ 99</span></div><p>Feijão sempre verde com arroz de nata, bacon, calabresa, queijo coalho e carne de sol.</p></article>
+          <article class="item"><div class="item-top"><h3>Arroz Caldoso de Costela</h3><span class="price">R$ 99</span></div><p>Risoto de costela angus assada no bafo.</p></article>
+          <article class="item"><div class="item-top"><h3>Frango Crocante</h3><span class="price">R$ 89</span></div><p>Frango empanado crocante. Acompanha arroz à grega, fritas, banana à milanesa e purê de batata.</p></article>
+          <article class="item"><div class="item-top"><h3>Frango Fit</h3><span class="price">R$ 89</span></div><p>Peito de frango grelhado montado sobre legumes em julienne. Acompanha arroz de brócolis.</p></article>
+          <article class="item"><div class="item-top"><h3>Camarão aos 4 Queijos</h3><span class="price">R$ 119</span></div><p>Espaguete ou arroz branco e batata doce crispy.</p></article>
+        </div>
+      </section>
+
+      <section class="section" id="familia">
+        <div class="section-header">
+          <div>
+            <span class="section-kicker">Serve bem 4 pessoas</span>
+            <h2>Pratos Família</h2>
+            <p class="lead">Opções mais generosas para compartilhar, com forte apelo de mesa farta.</p>
+          </div>
+          <div class="section-banner banner-pratos"></div>
+        </div>
+        <div class="menu-grid">
+          <article class="item"><div class="item-top"><h3>Super Misto Galetus</h3><span class="price">R$ 269</span></div><p>Picanha, carne de sol, coxa e sobrecoxa desossada de frango, coração de galinha, linguiça e cebolas. Acompanha feijão tropeiro, arroz branco, maionese de batata, farofa de ovos crispy e vinagrete.</p></article>
+          <article class="item"><div class="item-top"><h3>Super Picanha Argentina</h3><span class="price">R$ 269</span></div><p>Tradicional corte argentino acompanhado de feijão tropeiro, arroz branco, maionese de batata, bastões de macaxeira frita, farofa de ovos crispy e vinagrete.</p></article>
+          <article class="item"><div class="item-top"><h3>Carne de Sol do Cunha</h3><span class="price">R$ 199</span></div><p>Lombo alto de carne de sol coberto por queijo coalho assado, acompanhado de feijão sempre verde, arroz branco, bastões de macaxeira frita, pirão de queijo, paçoca, farofa de jerimum e vinagrete.</p></article>
+          <article class="item"><div class="item-top"><h3>Super Filé à Parmegiana</h3><span class="price">R$ 179</span></div><p>Espaguete, purê e batata frita. Escolha o molho: ao sugo, 4 queijos ou bolonhesa.</p></article>
+          <article class="item"><div class="item-top"><h3>Super Parmegiana de Frango</h3><span class="price">R$ 130</span></div><p>Espaguete, purê e batata frita. Escolha o molho: ao sugo, 4 queijos ou bolonhesa.</p></article>
+          <article class="item"><div class="item-top"><h3>Super Filé ao Molho Madeira</h3><span class="price">R$ 209</span></div><p>Arroz branco e purê.</p></article>
+          <article class="item"><div class="item-top"><h3>Super Maminha Importada</h3><span class="price">R$ 189</span></div><p>Feijão sempre verde, arroz branco, bastões de macaxeira frita, farofa bolão, vinagrete e chimichurri.</p></article>
+        </div>
+      </section>
+
+      <section class="section" id="galetos">
+        <div class="section-header">
+          <div>
+            <span class="section-kicker">Carta da casa</span>
+            <h2>Carta de Galetos</h2>
+            <p class="lead">Valores para 2 pessoas / 4 pessoas. O coração da identidade Galetus, agora com leitura mais premium, blocos mais nobres e melhor destaque para os pratos centrais da casa.</p>
+            <div class="price-note">Valores apresentados em formato duplo para facilitar a leitura entre 2 e 4 pessoas.</div>
+          </div>
+          <div class="section-banner banner-galetos"></div>
+        </div>
+        <div class="menu-grid">
+          <article class="item"><div class="item-top"><h3>Galeto Desossado Parmezão</h3><span class="price">R$ 85 / R$ 139</span></div><p>Galeto desossado ao parmesão com ervas, batata rústica, arroz de coentro, feijão sempre verde, purê de macaxeira, farofa de bacon e vinagrete.</p></article>
+          <article class="item"><div class="item-top"><h3>Galeto Sertanejo</h3><span class="price">R$ 85 / R$ 139</span></div><p>Coberto com creme de queijo manteiga e crispies de charque. Acompanha baião de dois, bastões de macaxeira frita, farofa de jerimum e vinagrete.</p></article>
+          <article class="item"><div class="item-top"><h3>Galeto Desossado</h3><span class="price">R$ 75 / R$ 119</span></div><p>Feijão sempre verde, arroz branco, batata frita, farofa de bacon e vinagrete.</p></article>
+          <article class="item"><div class="item-top"><h3>Galeto Desossado ao Queijo</h3><span class="price">R$ 79 / R$ 129</span></div><p>Feijão sempre verde, arroz branco, batata frita, farofa de bacon e vinagrete.</p></article>
+          <article class="item"><div class="item-top"><h3>Galeto Desossado Crocante</h3><span class="price">R$ 79 / R$ 129</span></div><p>Feijão sempre verde, arroz branco, bastões de macaxeira frita, farofa de ovos, vinagrete e molho rosé.</p></article>
+          <article class="item"><div class="item-top"><h3>Galeto Tradicional</h3><span class="price">R$ 65 / R$ 99</span></div><p>Feijão sempre verde, arroz branco, batata frita, farofa de bacon e vinagrete.</p></article>
+          <article class="item"><div class="item-top"><h3>Galeto Pernambucano</h3><span class="price">R$ 69 / R$ 109</span></div><p>Feijão tropeiro, arroz branco, bastões de macaxeira frita, farofa de ovos e vinagrete.</p></article>
+        </div>
+      </section>
+
+      <section class="section" id="bebidas">
+        <div class="section-header">
+          <div>
+            <span class="section-kicker">Bar</span>
+            <h2>Bebidas Geladas</h2>
+            <p class="lead">Chopp, cervejas, não alcoólicos e destilados organizados com leitura mais limpa, menos cara de lista crua e melhor sensação de cardápio premium.</p>
+            <div class="price-note">Os itens com dois valores indicam variações de volume, versão ou formato de serviço.</div>
+          </div>
+          <div class="section-banner banner-bebidas"></div>
+        </div>
+        <div class="menu-grid">
+          <article class="item"><div class="item-top"><h3>Chopp Brahma</h3><span class="price">R$ 10 / R$ 14</span></div><p>Caldereta / Caneca.</p></article>
+          <article class="item"><div class="item-top"><h3>Stella Artois 330ml / 600ml</h3><span class="price">R$ 11 / R$ 17</span></div></article>
+          <article class="item"><div class="item-top"><h3>Spaten 600ml</h3><span class="price">R$ 16</span></div></article>
+          <article class="item"><div class="item-top"><h3>Budweiser 330ml / 600ml</h3><span class="price">R$ 10 / R$ 15</span></div></article>
+          <article class="item"><div class="item-top"><h3>Antarctica Original 600ml</h3><span class="price">R$ 15</span></div></article>
+          <article class="item"><div class="item-top"><h3>Brahma Duplo Malte 600ml</h3><span class="price">R$ 13</span></div></article>
+          <article class="item"><div class="item-top"><h3>Brahma Chopp 600ml</h3><span class="price">R$ 12</span></div></article>
+          <article class="item"><div class="item-top"><h3>Stella Pure Gold 330ml</h3><span class="price">R$ 11</span></div></article>
+          <article class="item"><div class="item-top"><h3>Corona Extra 330ml</h3><span class="price">R$ 12</span></div></article>
+          <article class="item"><div class="item-top"><h3>Corona Cero 330ml</h3><span class="price">R$ 12</span></div></article>
+          <article class="item"><div class="item-top"><h3>Bud Zero 330ml</h3><span class="price">R$ 10</span></div></article>
+          <article class="item"><div class="item-top"><h3>Água Mineral / com Gás</h3><span class="price">R$ 8 / R$ 9</span></div></article>
+          <article class="item"><div class="item-top"><h3>Água Tônica / H2O</h3><span class="price">R$ 11 / R$ 12</span></div></article>
+          <article class="item"><div class="item-top"><h3>Refrigerante lata</h3><span class="price">R$ 10</span></div></article>
+          <article class="item"><div class="item-top"><h3>Água de Coco</h3><span class="price">R$ 14 / R$ 25</span></div><p>Copo / jarra.</p></article>
+          <article class="item"><div class="item-top"><h3>Suco de Frutas</h3><span class="price">R$ 13 / R$ 24</span></div><p>Copo / jarra.</p></article>
+          <article class="item"><div class="item-top"><h3>Caipirinha / Caipiroska</h3><span class="price">R$ 15 / R$ 20</span></div></article>
+          <article class="item"><div class="item-top"><h3>Caipiríssima</h3><span class="price">R$ 20</span></div></article>
+          <article class="item"><div class="item-top"><h3>Caipifruta</h3><span class="price">R$ 25</span></div><p>Uva, morango ou kiwi.</p></article>
+          <article class="item"><div class="item-top"><h3>Coquetel de Frutas sem Álcool</h3><span class="price">R$ 20</span></div></article>
+          <article class="item"><div class="item-top"><h3>Coquetel de Frutas com Álcool</h3><span class="price">R$ 25</span></div></article>
+          <article class="item"><div class="item-top"><h3>Tangiroska Nevada</h3><span class="price">R$ 20</span></div></article>
+          <article class="item"><div class="item-top"><h3>Smirnoff Ice / Red Bull</h3><span class="price">R$ 15 / R$ 19</span></div></article>
+          <article class="item"><div class="item-top"><h3>Gin Tônica Nacional</h3><span class="price">R$ 25</span></div></article>
+          <article class="item"><div class="item-top"><h3>Gin Tônica Importado</h3><span class="price">R$ 30</span></div></article>
+          <article class="item"><div class="item-top"><h3>Soda Italiana</h3><span class="price">R$ 20</span></div></article>
+          <article class="item"><div class="item-top"><h3>Cachaça Pitú</h3><span class="price">R$ 7</span></div></article>
+          <article class="item"><div class="item-top"><h3>Cachaça Pitú Gold</h3><span class="price">R$ 10</span></div></article>
+          <article class="item"><div class="item-top"><h3>Gin Importado</h3><span class="price">R$ 20</span></div></article>
+          <article class="item"><div class="item-top"><h3>Vodka Importada</h3><span class="price">R$ 20</span></div></article>
+          <article class="item"><div class="item-top"><h3>Licor Importado</h3><span class="price">R$ 20</span></div></article>
+          <article class="item"><div class="item-top"><h3>Aperitivo</h3><span class="price">R$ 9</span></div><p>Rum, martini ou conhaque.</p></article>
+          <article class="item"><div class="item-top"><h3>Whisky Black White</h3><span class="price">R$ 89 / R$ 9</span></div><p>Litro / dose.</p></article>
+          <article class="item"><div class="item-top"><h3>Whisk 8 Anos</h3><span class="price">R$ 180 / R$ 14</span></div><p>Litro / dose.</p></article>
+          <article class="item"><div class="item-top"><h3>Whisk 12 Anos</h3><span class="price">R$ 280 / R$ 20</span></div><p>Litro / dose.</p></article>
+        </div>
+      </section>
+
+      <section class="section" id="sobremesas">
+        <div class="menu-grid" style="margin-bottom:18px; grid-template-columns: repeat(3, minmax(0, 1fr));">
+          <article class="item"><div class="item-top"><h3>Bricelet com Chocolate</h3><span class="price">R$ 29</span></div></article>
+          <article class="item"><div class="item-top"><h3>Torre de Churros</h3><span class="price">R$ 29</span></div></article>
+          <article class="item"><div class="item-top"><h3>Brownie do Chef</h3><span class="price">R$ 29</span></div></article>
+        </div>
+        <div class="section-header">
+          <div>
+            <span class="section-kicker">Finalização</span>
+            <h2>Sobremesas, Cafés e Encerramentos</h2>
+            <p class="lead">Uma finalização mais elegante e convidativa, separando melhor o clima de sobremesa da leveza dos cafés.</p>
+            <div class="price-note">Sobremesas e cafés mantidos juntos, mas com visual mais equilibrado e menos sensação de bloco pesado.</div>
+          </div>
+          <div class="section-banner banner-doces"></div>
+        </div>
+        <div class="menu-grid" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
+          <article class="item"><div class="item-top"><h3>Semifrio de Chocolate</h3><span class="price">R$ 29</span></div></article>
+          <article class="item"><div class="item-top"><h3>Pudim de Leite Moça</h3><span class="price">R$ 19</span></div></article>
+          <article class="item"><div class="item-top"><h3>Petit Gateau</h3><span class="price">R$ 39</span></div></article>
+          <article class="item"><div class="item-top"><h3>Queijo Coalho com Mel de Engenho</h3><span class="price">R$ 29</span></div></article>
+          <article class="item"><div class="item-top"><h3>Cartola</h3><span class="price">R$ 29</span></div></article>
+          <article class="item"><div class="item-top"><h3>Banofe (fatia)</h3><span class="price">R$ 19</span></div></article>
+          <article class="item"><div class="item-top"><h3>Cheese Cake (fatia)</h3><span class="price">R$ 24</span></div></article>
+          <article class="item"><div class="item-top"><h3>Cocada de Forno com Sorvete de Creme</h3><span class="price">R$ 25</span></div></article>
+          <article class="item"><div class="item-top"><h3>Sorvete 1 bola</h3><span class="price">R$ 9</span></div></article>
+          <article class="item"><div class="item-top"><h3>Café Expresso</h3><span class="price">R$ 7 / R$ 10</span></div><p>Pequeno / grande.</p></article>
+          <article class="item"><div class="item-top"><h3>Café Expresso c/ Leite</h3><span class="price">R$ 9 / R$ 12</span></div><p>Pequeno / grande.</p></article>
+          <article class="item"><div class="item-top"><h3>Cappuccino</h3><span class="price">R$ 12 / R$ 16</span></div><p>Pequeno / grande.</p></article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer" id="contato">
+    <div class="container">
+      <div class="footer-card">
+        <div>
+          <h3>Galetus Rosarinho</h3>
+          <p>R. Regueira Costa, 80 - Rosarinho, Recife - PE, 52041-050</p>
+          <p class="muted-note">Telefone: (81) 3015-5777 • Instagram: @galetus</p>
+        </div>
+        <div class="contact-list">
+          <div><strong>Telefone</strong>(81) 3015-5777</div>
+          <div><strong>Instagram</strong>@galetus</div>
+          <div><strong>Endereço</strong>R. Regueira Costa, 80 - Rosarinho, Recife - PE, 52041-050</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const navLinks = document.querySelectorAll('.section-nav a');
+    const sections = [...navLinks].map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+    const activateLink = () => {
+      let currentId = sections[0]?.id;
+      sections.forEach(section => {
+        const top = section.getBoundingClientRect().top;
+        if (top <= 120) currentId = section.id;
+      });
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${currentId}`);
+      });
+    };
+    window.addEventListener('scroll', activateLink, { passive: true });
+    activateLink();
+  </script>
 </body>
 </html>
