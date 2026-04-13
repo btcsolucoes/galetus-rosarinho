@@ -4,92 +4,92 @@
       "id": "petiscos",
       "title": "Petiscos",
       "subtitle": "Para dividir",
-      "description": "Entradas com apelo de mesa, chope e jogo.",
+      "description": "Entradas pensadas para abrir a mesa com chope gelado e conversa longa.",
       "order": 1,
-      "triggers": ["regional", "hamburgueria", "salao", "chopp"]
+      "triggers": ["regional", "hamburgueria", "salão", "chope", "bar"]
     },
     {
       "id": "executivos",
       "title": "Executivos",
       "subtitle": "Almoço da casa",
-      "description": "Categoria ideal para giro de almoço durante a semana.",
+      "description": "Pratos de almoço com leitura direta, boa percepção de valor e giro diário.",
       "order": 2,
-      "triggers": ["executivo", "almoco", "salao"]
+      "triggers": ["executivo", "almoço", "salão", "trabalho"]
     },
     {
       "id": "grill",
       "title": "Grill da Casa",
       "subtitle": "Da brasa",
-      "description": "Pratos com força visual, proteína e sensação de fartura.",
+      "description": "Cortes e proteínas com presença de salão e finalização mais robusta.",
       "order": 3,
-      "triggers": ["grill", "bistro", "regional"]
+      "triggers": ["grill", "bistrô", "regional", "sofisticado"]
     },
     {
       "id": "burgers",
       "title": "Burgers",
       "subtitle": "Camada casual",
-      "description": "Itens de alto apelo para um público mais descontraído.",
+      "description": "Itens de apelo mais descontraído para almoço rápido e encontros informais.",
       "order": 4,
-      "triggers": ["hamburgueria", "casual", "familia"]
+      "triggers": ["hamburgueria", "casual", "família", "fim de semana"]
     },
     {
       "id": "pizzas",
       "title": "Pizzas",
-      "subtitle": "Família e compartilhamento",
-      "description": "Categoria importante para jantar e grupos familiares.",
+      "subtitle": "Mesa em família",
+      "description": "Sabores para compartilhar no jantar, no pós-trabalho e nos dias de jogo.",
       "order": 5,
-      "triggers": ["pizza", "familia", "salao"]
+      "triggers": ["pizza", "família", "salão", "jogo"]
     },
     {
       "id": "regionais",
       "title": "Clássicos Regionais",
       "subtitle": "Identidade local",
-      "description": "Pratos com sotaque regional e leitura mais tradicional.",
+      "description": "Receitas com sotaque local e sensação de comida de casa bem servida.",
       "order": 6,
-      "triggers": ["regional", "madeira", "pedra"]
+      "triggers": ["regional", "madeira", "pedra", "recife"]
     },
     {
       "id": "bebidas",
-      "title": "Chopp e Bebidas",
+      "title": "Chope e Bebidas",
       "subtitle": "Geladas da casa",
-      "description": "Chope, refrigerantes e refrescos para salão.",
+      "description": "Chope, refrescos e clássicos de salão para acompanhar grill, burger e pizza.",
       "order": 7,
-      "triggers": ["chopp", "salao", "jogo", "fim de semana"]
+      "triggers": ["chope", "salão", "jogo", "fim de semana"]
     },
     {
       "id": "sobremesas",
       "title": "Sobremesas",
       "subtitle": "Fechamento",
-      "description": "Final doce para completar a experiência da casa.",
+      "description": "Opções para encerrar a refeição com um toque mais indulgente.",
       "order": 8,
-      "triggers": ["familia", "bistro", "premium"]
+      "triggers": ["família", "bistrô", "premium", "jantar"]
     }
   ],
   "itemBlueprints": {
     "petiscos": [
-      ["Croqueta da Brasa", "Croqueta cremosa de costela com maionese picante.", 34, "Mais pedido"],
-      ["Frango Crocante do Bar", "Tirinhas crocantes com molho de alho tostado.", 32, "Especial"],
-      ["Batata da Mesa", "Batatas rústicas, páprica e creme da casa.", 26, "Novidade"]
+      ["Croqueta da Brasa", "Croquetas cremosas de costela com maionese levemente picante.", 34, "Mais pedido"],
+      ["Frango Crocante do Bar", "Tirinhas crocantes com molho de alho tostado e limão.", 32, "Especial"],
+      ["Batata da Mesa", "Batatas rústicas, páprica e creme da casa para compartilhar.", 26, "Novidade"]
     ],
     "executivos": [
-      ["Executivo da Brasa", "Proteína grelhada, arroz soltinho e acompanhamentos do dia.", 39, "Prato do dia"],
-      ["Almoço do Rosarinho", "Prato comercial com cara de casa e boa percepção de valor.", 42, "Destaque"],
+      ["Executivo da Brasa", "Proteína grelhada, arroz soltinho e guarnições do dia.", 39, "Prato do dia"],
+      ["Almoço do Rosarinho", "Prato comercial bem servido, com perfil de casa e almoço de bairro.", 42, "Destaque"],
       ["Executivo Premium", "Corte grelhado, purê rústico e molho de manteiga de ervas.", 49, "Especial"]
     ],
     "grill": [
-      ["Maminha da Casa", "Corte grelhado, legumes tostados e molho da casa.", 58, "Especial"],
-      ["Picanha da Brasa", "Picanha fatiada com farofa amanteigada e vinagrete.", 64, "Mais pedido"],
-      ["Frango de Chapa", "Frango laqueado com manteiga de alho e ervas.", 46, "Novidade"]
+      ["Maminha da Casa", "Maminha grelhada, legumes tostados e molho da casa.", 58, "Especial"],
+      ["Picanha da Brasa", "Picanha fatiada com farofa amanteigada e vinagrete fresco.", 64, "Mais pedido"],
+      ["Frango na Chapa", "Frango laqueado com manteiga de alho e finalização de ervas.", 46, "Novidade"]
     ],
     "burgers": [
       ["Burger Pedra & Brasa", "Hambúrguer alto, queijo derretido e maionese artesanal.", 32, "Mais pedido"],
-      ["Burger do Jogo", "Blend da casa, cebola crocante e barbecue levemente defumado.", 35, "Especial"],
-      ["Smash Rosso", "Duplo smash, queijo e molho vermelho da casa.", 29, "Novidade"]
+      ["Burger do Jogo", "Blend da casa, cebola crocante e barbecue de toque defumado.", 35, "Especial"],
+      ["Smash Rosso", "Duplo smash, queijo e molho vermelho da casa no pão macio.", 29, "Novidade"]
     ],
     "pizzas": [
-      ["Pizza da Família", "Molho artesanal, mussarela e finalização de forno forte.", 52, "Mais pedida"],
-      ["Pizza Grill & Pepper", "Queijo, pepperoni e toque de brasa no acabamento.", 58, "Especial"],
-      ["Pizza Regional", "Queijo, carne desfiada e cebola dourada.", 56, "Novidade"]
+      ["Pizza da Família", "Molho artesanal, mussarela e finalização em forno bem quente.", 52, "Mais pedida"],
+      ["Pizza Grill & Pepper", "Queijo, pepperoni e acabamento com pegada de brasa.", 58, "Especial"],
+      ["Pizza Regional", "Queijos, carne desfiada e cebola dourada em massa leve.", 56, "Novidade"]
     ],
     "regionais": [
       ["Carne de Sol da Casa", "Carne de sol, purê de macaxeira e manteiga de garrafa.", 54, "Regional"],
@@ -97,14 +97,14 @@
       ["Panelinha Sertaneja", "Ensopado encorpado servido em panela quente.", 48, "Especial"]
     ],
     "bebidas": [
-      ["Chopp da Casa", "Chope gelado servido como item âncora da categoria.", 12, "Gelado"],
-      ["Limonada da Pedra", "Limonada cítrica com toque aromático.", 13, "Refrescante"],
+      ["Chope da Casa", "Chope gelado servido como âncora da categoria.", 12, "Gelado"],
+      ["Limonada da Pedra", "Limonada cítrica com toque aromático e bastante frescor.", 13, "Refrescante"],
       ["Refrigerante Premium", "Seleção gelada para acompanhar petiscos, pizzas e pratos.", 8, "Gelado"]
     ],
     "sobremesas": [
-      ["Brownie do Salão", "Brownie úmido com calda e toque crocante.", 21, "Mais pedido"],
+      ["Brownie do Salão", "Brownie úmido com calda e crocância na medida.", 21, "Mais pedido"],
       ["Torta da Casa", "Fatia generosa com creme leve e acabamento elegante.", 23, "Especial"],
-      ["Sorvete do Dia", "Taça cremosa para finalizar a refeição com leveza.", 16, "Novidade"]
+      ["Sorvete do Dia", "Taça cremosa para fechar a refeição com leveza.", 16, "Novidade"]
     ]
   }
 }

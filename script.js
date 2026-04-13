@@ -1,58 +1,58 @@
 const PRESETS = {
   premium_cafe: {
-    label: "Premium Cafe",
-    keywords: ["cafe", "cafeteria", "brunch", "minimalista"],
-    colors: { primary: "#5A3427", secondary: "#F7F0E8", accent: "#D6A36A" },
+    label: "Premium Café",
+    keywords: ["café", "cafeteria", "brunch", "minimalista"],
+    colors: { primary: "#5a3427", secondary: "#f7f0e8", accent: "#d6a36a" },
     fonts: { heading: '"Cormorant Garamond"', body: '"Bricolage Grotesque"' },
-    tokens: { heroLayout: "1fr 1fr", heroAlign: "left", maxWidth: "1160px" },
+    tokens: { maxWidth: "1160px" },
     banner: "assets/placeholders/banner-cafe.svg"
   },
   regional_rustico: {
-    label: "Regional Rustico",
-    keywords: ["regional", "rustico", "madeira", "pedra", "sofisticado", "quente"],
-    colors: { primary: "#7A151A", secondary: "#F4EDE6", accent: "#EDE7DF" },
+    label: "Regional Rústico",
+    keywords: ["regional", "rústico", "rustico", "madeira", "pedra", "sofisticado", "quente"],
+    colors: { primary: "#a31521", secondary: "#f4efea", accent: "#151110" },
     fonts: { heading: '"Cormorant Garamond"', body: '"Bricolage Grotesque"' },
-    tokens: { heroLayout: "1.08fr .92fr", heroAlign: "left", maxWidth: "1200px" },
+    tokens: { maxWidth: "1120px" },
     banner: "assets/placeholders/banner-rustic.svg"
   },
   casual_moderno: {
     label: "Casual Moderno",
     keywords: ["casual", "moderno", "urbano", "leve"],
-    colors: { primary: "#20313D", secondary: "#F4F7F8", accent: "#F3B55E" },
+    colors: { primary: "#20313d", secondary: "#f4f7f8", accent: "#f3b55e" },
     fonts: { heading: '"Cormorant Garamond"', body: '"Bricolage Grotesque"' },
-    tokens: { heroLayout: "1fr 1fr", heroAlign: "left", maxWidth: "1160px" },
+    tokens: { maxWidth: "1160px" },
     banner: "assets/placeholders/banner-modern.svg"
   },
   hamburgueria_escura: {
     label: "Hamburgueria Escura",
     keywords: ["hamburgueria", "burger", "escuro", "industrial", "intenso"],
-    colors: { primary: "#181312", secondary: "#F4EEE8", accent: "#C93F2C" },
+    colors: { primary: "#1f1716", secondary: "#f4eee8", accent: "#c93f2c" },
     fonts: { heading: '"Cormorant Garamond"', body: '"Bricolage Grotesque"' },
-    tokens: { heroLayout: "1fr 1fr", heroAlign: "left", maxWidth: "1180px" },
+    tokens: { maxWidth: "1180px" },
     banner: "assets/placeholders/banner-dark.svg"
   },
   executivo_clean: {
     label: "Executivo Clean",
-    keywords: ["executivo", "almoco", "clean", "corporativo"],
-    colors: { primary: "#2A473E", secondary: "#F4F5F0", accent: "#C9A869" },
+    keywords: ["executivo", "almoço", "almoco", "clean", "corporativo"],
+    colors: { primary: "#2a473e", secondary: "#f4f5f0", accent: "#c9a869" },
     fonts: { heading: '"Cormorant Garamond"', body: '"Bricolage Grotesque"' },
-    tokens: { heroLayout: "1fr .95fr", heroAlign: "left", maxWidth: "1140px" },
+    tokens: { maxWidth: "1140px" },
     banner: "assets/placeholders/banner-clean.svg"
   },
   tropical_praia: {
     label: "Tropical Praia",
     keywords: ["praia", "tropical", "leve", "solar"],
-    colors: { primary: "#156B65", secondary: "#F4F3E9", accent: "#F2B861" },
+    colors: { primary: "#156b65", secondary: "#f4f3e9", accent: "#f2b861" },
     fonts: { heading: '"Cormorant Garamond"', body: '"Bricolage Grotesque"' },
-    tokens: { heroLayout: "1fr 1fr", heroAlign: "left", maxWidth: "1180px" },
+    tokens: { maxWidth: "1180px" },
     banner: "assets/placeholders/banner-tropical.svg"
   },
   doceria_delicada: {
     label: "Doceria Delicada",
-    keywords: ["doce", "doceria", "delicado", "sobremesa"],
-    colors: { primary: "#8B4B5E", secondary: "#FBF1F4", accent: "#E9C16C" },
+    keywords: ["doce", "doceria", "delicada", "sobremesa"],
+    colors: { primary: "#8b4b5e", secondary: "#fbf1f4", accent: "#e9c16c" },
     fonts: { heading: '"Cormorant Garamond"', body: '"Bricolage Grotesque"' },
-    tokens: { heroLayout: "1fr 1fr", heroAlign: "left", maxWidth: "1120px" },
+    tokens: { maxWidth: "1120px" },
     banner: "assets/placeholders/banner-sweet.svg"
   }
 };
@@ -65,6 +65,19 @@ const PLACEHOLDER_IMAGES = [
   "assets/placeholders/dish-5.svg",
   "assets/placeholders/dish-6.svg"
 ];
+
+const SPECIAL_BADGES = new Set([
+  "mais pedido",
+  "mais pedida",
+  "especial",
+  "prato do dia",
+  "destaque",
+  "promoção",
+  "promocao",
+  "regional",
+  "novidade",
+  "combo"
+]);
 
 const state = {
   config: null,
@@ -90,15 +103,12 @@ const refs = {
   restaurantContact: document.querySelector("#restaurant-contact"),
   heroActions: document.querySelector("#hero-actions"),
   operationBadges: document.querySelector("#operation-badges"),
-  presetLabel: document.querySelector("#preset-label"),
-  heroCardTitle: document.querySelector("#hero-card-title"),
-  heroCardCopy: document.querySelector("#hero-card-copy"),
-  heroBanner: document.querySelector("#hero-banner"),
   categoryChips: document.querySelector("#category-chips"),
   categorySelect: document.querySelector("#category-select"),
   searchInput: document.querySelector("#search-input"),
   specialFilter: document.querySelector("#special-filter"),
   dailySpecialModule: document.querySelector("#daily-special-module"),
+  dailySpecialKicker: document.querySelector("#daily-special-kicker"),
   dailySpecialTitle: document.querySelector("#daily-special-title"),
   dailySpecialCopy: document.querySelector("#daily-special-copy"),
   dailySpecialCard: document.querySelector("#daily-special-card"),
@@ -118,22 +128,17 @@ const refs = {
 };
 
 const sanitize = (value) => String(value ?? "").trim();
+const toArray = (value) => (Array.isArray(value) ? value : value ? [value] : []);
 const normalize = (value) =>
   sanitize(value)
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase();
-
 const currency = (value) =>
   new Intl.NumberFormat("pt-BR", {
     style: "currency",
     currency: "BRL"
-  }).format(Number(value));
-
-const isSpecialItem = (item) =>
-  item.featured ||
-  item.dailySpecial ||
-  ["especial", "mais pedido", "prato do dia", "destaque", "combo", "novidade", "regional"].includes(normalize(item.badge));
+  }).format(Number(value || 0));
 
 async function loadFiles() {
   const [configResponse, templateResponse] = await Promise.all([
@@ -142,7 +147,7 @@ async function loadFiles() {
   ]);
 
   if (!configResponse.ok || !templateResponse.ok) {
-    throw new Error("Nao foi possivel carregar os arquivos do cardapio.");
+    throw new Error("Não foi possível carregar os arquivos do cardápio.");
   }
 
   state.config = await configResponse.json();
@@ -150,7 +155,7 @@ async function loadFiles() {
 }
 
 function inferWhatsAppDigits(config) {
-  const raw = config.whatsapp || config.phone || "";
+  const raw = sanitize(config.whatsapp || config.phone);
   const digits = raw.replace(/\D/g, "");
   if (!digits) return "";
   return digits.startsWith("55") ? digits : `55${digits}`;
@@ -163,37 +168,34 @@ function buildInstagramUrl(handle) {
 }
 
 function resolvePresetKey(config) {
-  const rawTypes = Array.isArray(config.restaurantType) ? config.restaurantType : [config.restaurantType];
-  const context = normalize([
-    ...rawTypes,
-    ...(config.operationMode || []),
-    config.visualReference,
-    config.tagline,
-    config.preferredStyle,
-    config.restaurantName
-  ].join(" "));
-
   const explicit = normalize(config.preferredStyle);
   if (explicit && explicit !== "auto") {
-    const directMatch = Object.keys(PRESETS).find((key) => normalize(key) === explicit);
-    if (directMatch) return directMatch;
+    if (PRESETS[explicit]) return explicit;
     if (explicit.includes("regional")) return "regional_rustico";
     if (explicit.includes("burger")) return "hamburgueria_escura";
     if (explicit.includes("executivo")) return "executivo_clean";
-    if (explicit.includes("tropical")) return "tropical_praia";
   }
 
+  const context = normalize(
+    [
+      ...toArray(config.restaurantType),
+      ...toArray(config.operationMode),
+      config.visualReference,
+      config.tagline,
+      config.restaurantName
+    ].join(" ")
+  );
+
   const ranked = Object.entries(PRESETS)
-    .map(([key, preset]) => {
-      const score = preset.keywords.reduce(
-        (total, keyword) => total + (context.includes(normalize(keyword)) ? 1 : 0),
-        0
-      );
-      return { key, score };
-    })
+    .map(([key, preset]) => ({
+      key,
+      score: preset.keywords.reduce((total, keyword) => {
+        return total + (context.includes(normalize(keyword)) ? 1 : 0);
+      }, 0)
+    }))
     .sort((a, b) => b.score - a.score);
 
-  return ranked[0]?.score > 0 ? ranked[0].key : "casual_moderno";
+  return ranked[0]?.score > 0 ? ranked[0].key : "regional_rustico";
 }
 
 function buildTheme(config, preset) {
@@ -203,8 +205,6 @@ function buildTheme(config, preset) {
     accent: config.preferredPalette?.accent || preset.colors.accent,
     headingFont: preset.fonts.heading,
     bodyFont: preset.fonts.body,
-    heroAlign: preset.tokens.heroAlign,
-    heroLayout: preset.tokens.heroLayout,
     maxWidth: preset.tokens.maxWidth,
     banner: config.bannerImage || preset.banner || "assets/placeholders/banner-generic.svg"
   };
@@ -215,27 +215,36 @@ function applyTheme(theme) {
   root.style.setProperty("--primary", theme.primary);
   root.style.setProperty("--secondary", theme.secondary);
   root.style.setProperty("--accent", theme.accent);
+  root.style.setProperty("--gold", theme.primary);
   root.style.setProperty("--font-heading", theme.headingFont);
   root.style.setProperty("--font-body", theme.bodyFont);
-  root.style.setProperty("--hero-align", theme.heroAlign);
-  root.style.setProperty("--hero-layout", theme.heroLayout);
   root.style.setProperty("--max-width", theme.maxWidth);
 }
 
+function buildAutoTagline(config) {
+  const types = toArray(config.restaurantType);
+  if (types.length === 0) return "Cardápio da casa";
+  return types
+    .slice(0, 2)
+    .map((type) => sanitize(type))
+    .join(" • ");
+}
+
 function buildAutoDescription(config) {
-  const types = (config.restaurantType || []).join(", ");
-  return `${config.restaurantName} combina ${types} em um salao pensado para almoco, encontros em familia e chope gelado com atmosfera marcante.`;
+  const typeCopy = toArray(config.restaurantType).join(", ");
+  return `${config.restaurantName} combina ${typeCopy} em um salão pensado para almoço, mesa em família e chope gelado em clima acolhedor.`;
 }
 
-function buildCommercialHook(config) {
-  const reference = normalize(config.visualReference);
-  if (reference.includes("jogo") || reference.includes("chopp")) {
-    return "Um salao para almoco pos-trabalho, pizza em familia e chope gelado nos dias de jogo.";
-  }
-  return "Sabores de salao com leitura direta, clima marcante e navegacao simples no cardapio.";
+function formatOperationMode(mode) {
+  const map = {
+    salao: "Salão",
+    delivery: "Delivery",
+    retirada: "Retirada"
+  };
+  return map[normalize(mode)] || sanitize(mode);
 }
 
-function buildLink(label, href, className) {
+function createActionLink(label, href, className) {
   const link = document.createElement("a");
   link.className = className;
   link.href = href;
@@ -247,53 +256,65 @@ function buildLink(label, href, className) {
   return link;
 }
 
-function formatOperationMode(mode) {
-  const map = {
-    salao: "Salao",
-    delivery: "Delivery",
-    retirada: "Retirada"
-  };
-  return map[normalize(mode)] || sanitize(mode);
+function buildWhatsAppUrl(message) {
+  const digits = inferWhatsAppDigits(state.config);
+  if (!digits) return "#";
+  return `https://wa.me/${digits}?text=${encodeURIComponent(message)}`;
+}
+
+function renderBrandMark() {
+  refs.brandMark.innerHTML = "";
+
+  if (!state.config.logoImage) {
+    refs.brandMark.textContent = state.config.restaurantName.slice(0, 2).toUpperCase();
+    return;
+  }
+
+  const image = document.createElement("img");
+  image.src = state.config.logoImage;
+  image.alt = `Logo ${state.config.restaurantName}`;
+  image.loading = "eager";
+  image.dataset.ignoreFallback = "true";
+  image.addEventListener("error", () => {
+    refs.brandMark.textContent = state.config.restaurantName.slice(0, 2).toUpperCase();
+  });
+  refs.brandMark.appendChild(image);
 }
 
 function renderHero() {
-  const { config, preset, theme } = state;
-  const whatsappDigits = inferWhatsAppDigits(config);
-  const whatsappUrl = whatsappDigits
-    ? `https://wa.me/${whatsappDigits}?text=${encodeURIComponent(`Ola! Quero saber mais sobre o cardapio do ${config.restaurantName}.`)}`
-    : "#";
+  const config = state.config;
+  const whatsappUrl = buildWhatsAppUrl(`Olá! Quero saber mais sobre o cardápio da ${config.restaurantName}.`);
+  const metaDescription = document.querySelector('meta[name="description"]');
 
-  if (config.logoImage) {
-    refs.brandMark.innerHTML = `<img src="${config.logoImage}" alt="Logo ${config.restaurantName}" loading="eager">`;
-    attachImageFallbacks(refs.brandMark);
-  } else {
-    refs.brandMark.textContent = config.restaurantName.slice(0, 2).toUpperCase();
+  document.title = `${config.restaurantName} | Cardápio`;
+  if (metaDescription) {
+    metaDescription.content = `${config.restaurantName}: ${config.tagline || buildAutoTagline(config)} em ${config.address}.`;
   }
 
-  refs.heroKicker.textContent = "Rosarinho • Recife";
+  renderBrandMark();
+
+  refs.heroKicker.textContent = config.heroKicker || "Rosarinho • Recife";
   refs.restaurantName.textContent = config.restaurantName;
-  refs.restaurantTagline.textContent = config.tagline || `${config.restaurantName} • Grill e Pizza`;
+  refs.restaurantTagline.textContent = config.tagline || buildAutoTagline(config);
   refs.restaurantDescription.textContent = config.description || buildAutoDescription(config);
-  refs.restaurantAddress.textContent = config.address || "Endereco nao informado";
-  refs.restaurantContact.textContent = config.phone || "Contato nao informado";
-  refs.presetLabel.textContent = "Galetus";
-  refs.heroCardTitle.textContent = `${config.restaurantName} para almoco, pizza e chope.`;
-  refs.heroCardCopy.textContent = buildCommercialHook(config);
-  refs.heroBanner.src = theme.banner;
-  refs.heroBanner.alt = `${config.restaurantName} Rosarinho`;
-  refs.heroBanner.onerror = onImageError;
+  refs.restaurantAddress.textContent = config.address || "Endereço não informado";
+  refs.restaurantContact.textContent = config.openingHours || "Horário não informado";
 
   refs.heroActions.innerHTML = "";
-  if (whatsappDigits) {
-    refs.heroActions.appendChild(buildLink("Falar no WhatsApp", whatsappUrl, "primary-button"));
+  if (inferWhatsAppDigits(config)) {
+    refs.heroActions.appendChild(
+      createActionLink(config.primaryCtaLabel || "Falar no WhatsApp", whatsappUrl, "primary-button")
+    );
   }
-  refs.heroActions.appendChild(buildLink("Ver cardapio", "#menu-stage", "secondary-button"));
+  refs.heroActions.appendChild(
+    createActionLink(config.secondaryCtaLabel || "Ver cardápio", "#menu-stage", "secondary-button")
+  );
 
   refs.operationBadges.innerHTML = "";
   const badges = [
-    ...(config.operationMode || []).map(formatOperationMode),
+    ...toArray(config.operationMode).map(formatOperationMode),
     config.instagram ? "Instagram ativo" : "",
-    config.modules?.dailySpecial ? "Rotacao diaria" : ""
+    config.modules?.dailySpecial ? "Rotação diária" : ""
   ].filter(Boolean);
 
   badges.forEach((label) => {
@@ -306,92 +327,152 @@ function renderHero() {
   refs.footerName.textContent = config.restaurantName;
   refs.footerAddress.textContent = config.address || "";
   refs.footerPhone.textContent = config.phone || "";
+  refs.footerCopy.textContent = `${config.restaurantName} no Rosarinho, com almoço, grill, pizza e chope em um ambiente acolhedor.`;
+
   refs.footerWhatsapp.href = whatsappUrl;
-  refs.footerWhatsapp.hidden = !whatsappDigits;
+  refs.footerWhatsapp.hidden = !inferWhatsAppDigits(config);
 
   const instagramUrl = buildInstagramUrl(config.instagram);
   refs.footerInstagram.href = instagramUrl || "#";
   refs.footerInstagram.hidden = !instagramUrl;
-  refs.footerCopy.textContent = `${config.restaurantName} • ${config.tagline || "Grill e Pizza"} • Rosarinho, Recife.`;
   refs.qrstackSignature.hidden = !config.modules?.qrStackSignature;
 }
 
 function chooseCategories() {
-  const { config, templateData } = state;
-  const context = normalize([
-    config.tagline,
-    config.visualReference,
-    config.restaurantName,
-    ...(config.restaurantType || []),
-    ...(config.operationMode || [])
-  ].join(" "));
+  const context = normalize(
+    [
+      state.config.tagline,
+      state.config.visualReference,
+      state.config.restaurantName,
+      ...toArray(state.config.restaurantType),
+      ...toArray(state.config.operationMode)
+    ].join(" ")
+  );
 
-  const selected = templateData.categoryBlueprints
-    .map((blueprint) => {
-      const triggerScore = blueprint.triggers.reduce(
-        (score, trigger) => score + (context.includes(normalize(trigger)) ? 1 : 0),
-        0
-      );
-      return { ...blueprint, triggerScore };
-    })
-    .filter((blueprint) => blueprint.triggerScore > 0 || ["petiscos", "bebidas", "sobremesas"].includes(blueprint.id))
+  const selected = state.templateData.categoryBlueprints
+    .map((blueprint) => ({
+      ...blueprint,
+      score: blueprint.triggers.reduce((score, trigger) => {
+        return score + (context.includes(normalize(trigger)) ? 1 : 0);
+      }, 0)
+    }))
+    .filter((category) => category.score > 0 || ["petiscos", "executivos", "pizzas", "bebidas"].includes(category.id))
     .sort((a, b) => {
-      if (a.triggerScore === b.triggerScore) return a.order - b.order;
-      return b.triggerScore - a.triggerScore;
+      if (a.score === b.score) return a.order - b.order;
+      return b.score - a.score;
     });
 
   const unique = [];
   const seen = new Set();
   selected.forEach((category) => {
-    if (!seen.has(category.id)) {
-      unique.push(category);
-      seen.add(category.id);
-    }
+    if (seen.has(category.id)) return;
+    unique.push(category);
+    seen.add(category.id);
   });
 
-  state.generatedCategories = unique
-    .sort((a, b) => a.order - b.order)
-    .slice(0, 8);
+  state.generatedCategories = unique.sort((a, b) => a.order - b.order).slice(0, 8);
+}
+
+function buildItemNotes(categoryId) {
+  const notes = {
+    petiscos: "Ideal para compartilhar.",
+    executivos: "Disponível no almoço.",
+    grill: "Cozinha de salão.",
+    burgers: "Boa escolha para refeições rápidas.",
+    pizzas: "Boa pedida para dividir.",
+    regionais: "Leitura de casa.",
+    bebidas: "Servido bem gelado.",
+    sobremesas: "Finalização da casa."
+  };
+  return notes[categoryId] || "Seleção da casa.";
 }
 
 function generateItems() {
-  const { config, templateData, generatedCategories } = state;
   let imageIndex = 0;
   const items = [];
 
-  generatedCategories.forEach((category, categoryIndex) => {
-    const blueprints = templateData.itemBlueprints[category.id] || [];
+  state.generatedCategories.forEach((category) => {
+    const blueprints = state.templateData.itemBlueprints[category.id] || [];
+
     blueprints.forEach((blueprint, itemIndex) => {
-      const image = PLACEHOLDER_IMAGES[imageIndex % PLACEHOLDER_IMAGES.length];
-      imageIndex += 1;
-      const basePrice = blueprint[2];
-      const promo = itemIndex === 0 && categoryIndex % 2 === 0 ? Math.max(basePrice - 4, 8) : null;
-      const badge = blueprint[3] || "";
-      const isUnavailable = category.id === "burgers" && itemIndex === 2;
-      const dailySpecial = config.modules?.dailySpecial && category.id === "executivos" && itemIndex === 0;
+      const [name, description, price, badge] = blueprint;
+      const promotionalPrice =
+        itemIndex === 0 && ["executivos", "pizzas", "petiscos"].includes(category.id)
+          ? Math.max(Number(price) - 4, 8)
+          : null;
+
       items.push({
         id: `${category.id}-${itemIndex + 1}`,
-        name: blueprint[0],
-        description: blueprint[1],
-        price: basePrice,
-        promotionalPrice: promo,
+        categoryId: category.id,
+        name,
+        description,
+        price,
+        promotionalPrice,
         badge,
-        image,
-        availability: isUnavailable ? "unavailable" : "available",
-        featured: itemIndex === 0 || ["Mais pedido", "Especial", "Prato do dia", "Destaque", "Regional"].includes(blueprint[3]),
-        dailySpecial,
-        notes: "Selecao inicial da casa.",
-        categoryId: category.id
+        image: PLACEHOLDER_IMAGES[imageIndex % PLACEHOLDER_IMAGES.length],
+        availability: "available",
+        featured: itemIndex === 0 || SPECIAL_BADGES.has(normalize(badge)),
+        dailySpecial: category.id === "executivos" && itemIndex === 0,
+        notes: buildItemNotes(category.id)
       });
+
+      imageIndex += 1;
     });
   });
 
   state.generatedItems = items;
 }
 
+function updateCategoryNavigation() {
+  document.querySelectorAll(".category-chip").forEach((chip) => {
+    const isSpecialChip = chip.dataset.target === "daily-special";
+    if (isSpecialChip) {
+      chip.classList.remove("is-active");
+      return;
+    }
+
+    const chipCategory = chip.dataset.categoryId || "all";
+    chip.classList.toggle("is-active", chipCategory === state.filters.category);
+  });
+
+  refs.categorySelect.value = state.filters.category;
+}
+
+function setCategoryFilter(categoryId) {
+  state.filters.category = categoryId;
+  renderMenu();
+  updateCategoryNavigation();
+}
+
 function buildCategoryNavigation() {
   refs.categoryChips.innerHTML = "";
   refs.categorySelect.innerHTML = '<option value="all">Todas as categorias</option>';
+
+  if (state.config.modules?.dailySpecial) {
+    const specialChip = document.createElement("button");
+    specialChip.type = "button";
+    specialChip.className = "category-chip";
+    specialChip.dataset.target = "daily-special";
+    specialChip.textContent = state.config.dailySpecialTitle || "Almoço de Hoje";
+    specialChip.addEventListener("click", () => {
+      const section = refs.dailySpecialModule;
+      if (!section.hidden) {
+        section.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+    refs.categoryChips.appendChild(specialChip);
+  }
+
+  const allChip = document.createElement("button");
+  allChip.type = "button";
+  allChip.className = "category-chip";
+  allChip.dataset.categoryId = "all";
+  allChip.textContent = "Tudo";
+  allChip.addEventListener("click", () => {
+    setCategoryFilter("all");
+    refs.menuStage.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+  refs.categoryChips.appendChild(allChip);
 
   state.generatedCategories.forEach((category) => {
     const chip = document.createElement("button");
@@ -400,8 +481,8 @@ function buildCategoryNavigation() {
     chip.dataset.categoryId = category.id;
     chip.textContent = category.title;
     chip.addEventListener("click", () => {
-      const section = document.querySelector(`[data-category-section="${category.id}"]`);
-      if (section) section.scrollIntoView({ behavior: "smooth", block: "start" });
+      setCategoryFilter(category.id);
+      refs.menuStage.scrollIntoView({ behavior: "smooth", block: "start" });
     });
     refs.categoryChips.appendChild(chip);
 
@@ -410,17 +491,44 @@ function buildCategoryNavigation() {
     option.textContent = category.title;
     refs.categorySelect.appendChild(option);
   });
+
+  updateCategoryNavigation();
 }
 
-function getCategoryTitle(categoryId) {
-  return state.generatedCategories.find((category) => category.id === categoryId)?.title || "";
+function getCategoryById(categoryId) {
+  return state.generatedCategories.find((category) => category.id === categoryId) || null;
 }
 
-function buildLinkMarkup(itemName) {
-  const digits = inferWhatsAppDigits(state.config);
-  if (!digits) return "";
-  const url = `https://wa.me/${digits}?text=${encodeURIComponent(`Ola! Quero saber mais sobre o item "${itemName}" do ${state.config.restaurantName}.`)}`;
-  return `<a class="primary-button" href="${url}" target="_blank" rel="noreferrer">Consultar item</a>`;
+function buildBadges(item) {
+  const badges = [];
+  if (item.badge) badges.push(`<span class="badge">${item.badge}</span>`);
+  if (item.promotionalPrice) badges.push('<span class="badge badge-dark">Promoção</span>');
+  if (item.availability !== "available") badges.push('<span class="badge badge-danger">Indisponível</span>');
+  return badges;
+}
+
+function buildMiniCard(item) {
+  return `
+    <article class="menu-card">
+      <div class="menu-image-wrap">
+        <img class="menu-image" src="${item.image}" alt="${item.name}" loading="lazy">
+        <div class="menu-badges">${buildBadges(item).join("")}</div>
+      </div>
+      <div class="menu-body">
+        <div class="menu-copy">
+          <h3 class="menu-title">${item.name}</h3>
+          <p class="menu-description">${item.description}</p>
+        </div>
+        <div class="menu-footer">
+          <div class="menu-prices">
+            <span class="menu-price">${currency(item.promotionalPrice ?? item.price)}</span>
+            <span class="menu-price-old" ${item.promotionalPrice ? "" : "hidden"}>${currency(item.price)}</span>
+          </div>
+          <a class="menu-action" href="${buildWhatsAppUrl(`Olá! Quero saber mais sobre ${item.name}.`)}" target="_blank" rel="noreferrer">Consultar</a>
+        </div>
+      </div>
+    </article>
+  `;
 }
 
 function renderDailySpecial() {
@@ -440,10 +548,13 @@ function renderDailySpecial() {
   }
 
   refs.dailySpecialModule.hidden = false;
-  refs.dailySpecialTitle.textContent = normalize((state.config.restaurantType || []).join(" ")).includes("executivo")
-    ? "Almoco de Hoje"
-    : "Especial do Dia";
-  refs.dailySpecialCopy.textContent = "Selecao do dia com destaque para almoco, assinatura da casa e maior giro da operacao.";
+  refs.dailySpecialKicker.textContent = state.config.dailySpecialSubtitle || "Rotação diária";
+  refs.dailySpecialTitle.textContent = state.config.dailySpecialTitle || "Almoço de Hoje";
+  refs.dailySpecialCopy.textContent =
+    state.config.dailySpecialDescription ||
+    "Sugestão da casa para destacar o almoço e facilitar a escolha logo no início da navegação.";
+
+  const category = getCategoryById(candidate.categoryId);
 
   refs.dailySpecialCard.innerHTML = `
     <div class="daily-grid">
@@ -451,20 +562,20 @@ function renderDailySpecial() {
         <img src="${candidate.image}" alt="${candidate.name}" loading="lazy">
       </div>
       <div class="special-content">
-        <span class="section-kicker">${candidate.badge || "Casa recomenda"}</span>
+        <span class="section-kicker">${candidate.badge || "Escolha da casa"}</span>
         <h3 class="special-name">${candidate.name}</h3>
         <p class="special-copy">${candidate.description}</p>
         <div class="special-meta">
-          <span class="meta-pill">${getCategoryTitle(candidate.categoryId)}</span>
-          <span class="meta-pill">Rotacao diaria</span>
+          <span class="meta-pill">${category?.title || "Destaque"}</span>
+          <span class="meta-pill">Disponível no salão</span>
         </div>
-        <p class="special-note">Escolha do dia para puxar o almoco, destacar a casa e orientar a decisao logo na primeira dobra.</p>
+        <p class="special-note">Boa escolha para quem quer decidir rápido e seguir direto para um almoço bem servido.</p>
         <div class="special-footer">
           <div class="special-price">
             <span>Hoje</span>
             <strong>${currency(candidate.promotionalPrice ?? candidate.price)}</strong>
           </div>
-          ${buildLinkMarkup(candidate.name)}
+          <a class="primary-button" href="${buildWhatsAppUrl(`Olá! Quero saber mais sobre ${candidate.name}.`)}" target="_blank" rel="noreferrer">Consultar</a>
         </div>
       </div>
     </div>
@@ -474,29 +585,24 @@ function renderDailySpecial() {
 }
 
 function renderHighlights() {
-  if (!state.config.modules?.featuredItems && !state.config.modules?.combos) {
-    refs.featuredModule.hidden = true;
-    return;
-  }
-
-  const featuredItems = state.generatedItems.filter((item) => item.featured).slice(0, 4);
-  const promoItems = state.generatedItems.filter((item) => item.promotionalPrice).slice(0, 4);
   const blocks = [];
+  const featuredItems = state.generatedItems.filter((item) => item.featured).slice(0, 3);
+  const promoItems = state.generatedItems.filter((item) => item.promotionalPrice).slice(0, 3);
 
   if (state.config.modules?.featuredItems && featuredItems.length) {
     blocks.push({
       kicker: "Mais pedidos",
-      title: "Escolhas para comecar bem",
-      description: "Itens com alta saida, boa leitura de mesa e forca para abrir o pedido.",
+      title: "Escolhas para começar bem",
+      description: "Itens com forte apelo de salão, boa leitura de mesa e giro consistente.",
       items: featuredItems
     });
   }
 
   if (state.config.modules?.combos && promoItems.length) {
     blocks.push({
-      kicker: "Combos e promocoes",
-      title: "Precos para compartilhar",
-      description: "Selecao com precos estrategicos para grupos, dias de jogo e pedidos de maior volume.",
+      kicker: "Ofertas da casa",
+      title: "Preços que ajudam na decisão",
+      description: "Sugestões para almoço, mesa compartilhada e pedidos com melhor percepção de valor.",
       items: promoItems
     });
   }
@@ -519,123 +625,93 @@ function renderHighlights() {
   attachImageFallbacks(refs.highlightGrid);
 }
 
-function buildMiniCard(item) {
-  return `
-    <article class="menu-card">
-      <div class="menu-image-wrap">
-        <img class="menu-image" src="${item.image}" alt="${item.name}" loading="lazy">
-        <div class="menu-badges">${buildBadges(item).join("")}</div>
-      </div>
-      <div class="menu-body">
-        <div class="menu-copy">
-          <h4 class="menu-title">${item.name}</h4>
-          <p class="menu-description">${item.description}</p>
-        </div>
-        <div class="menu-footer">
-          <div class="menu-prices">
-            <span class="menu-price">${currency(item.promotionalPrice ?? item.price)}</span>
-            <span class="menu-price-old" ${item.promotionalPrice ? "" : "hidden"}>${currency(item.price)}</span>
-          </div>
-          ${buildLinkMarkup(item.name)}
-        </div>
-      </div>
-    </article>
-  `;
-}
-
-function buildBadges(item) {
-  const badges = [];
-  if (item.badge) badges.push(`<span class="badge">${item.badge}</span>`);
-  if (item.featured) badges.push('<span class="badge badge-dark">Destaque</span>');
-  if (item.availability === "unavailable") badges.push('<span class="badge badge-danger">Indisponivel</span>');
-  return badges;
-}
-
-function getFilteredItems() {
-  return state.generatedItems.filter((item) => {
-    const matchesSearch =
-      !state.filters.search ||
-      normalize(`${item.name} ${item.description} ${item.badge}`).includes(normalize(state.filters.search));
-    const matchesCategory = state.filters.category === "all" || item.categoryId === state.filters.category;
-    const matchesSpecial = !state.filters.specialOnly || isSpecialItem(item);
-    return matchesSearch && matchesCategory && matchesSpecial;
-  });
-}
-
-function renderMenu() {
-  const items = getFilteredItems();
-  refs.menuStage.innerHTML = "";
-
-  const blocks = state.generatedCategories
-    .map((category) => ({
-      ...category,
-      items: items.filter((item) => item.categoryId === category.id)
-    }))
-    .filter((category) => category.items.length > 0);
-
-  refs.emptyState.hidden = blocks.length > 0;
-
-  blocks.forEach((category) => {
-    const section = document.createElement("section");
-    section.className = "menu-section reveal";
-    section.dataset.categorySection = category.id;
-    section.id = `section-${category.id}`;
-    section.innerHTML = `
-      <div class="menu-head">
-        <span class="section-kicker">${category.subtitle}</span>
-        <h2>${category.title}</h2>
-        <p>${category.description}</p>
-      </div>
-      <div class="menu-grid"></div>
-    `;
-    const grid = section.querySelector(".menu-grid");
-    category.items.forEach((item) => grid.appendChild(buildCard(item)));
-    refs.menuStage.appendChild(section);
-  });
-
-  attachImageFallbacks(refs.menuStage);
-  setupRevealObserver();
-  setupCategorySpy();
+function itemMatchesFilters(item) {
+  const searchTerm = normalize(state.filters.search);
+  const matchesSearch =
+    !searchTerm || normalize(`${item.name} ${item.description} ${item.badge} ${item.notes}`).includes(searchTerm);
+  const matchesCategory = state.filters.category === "all" || item.categoryId === state.filters.category;
+  const matchesSpecial = !state.filters.specialOnly || item.featured || SPECIAL_BADGES.has(normalize(item.badge));
+  return matchesSearch && matchesCategory && matchesSpecial;
 }
 
 function buildCard(item) {
   const card = refs.cardTemplate.content.firstElementChild.cloneNode(true);
-  card.classList.toggle("is-unavailable", item.availability === "unavailable");
+  card.classList.toggle("is-unavailable", item.availability !== "available");
 
   const image = card.querySelector(".menu-image");
   image.src = item.image;
   image.alt = item.name;
-  image.onerror = onImageError;
 
   card.querySelector(".menu-badges").innerHTML = buildBadges(item).join("");
   card.querySelector(".menu-title").textContent = item.name;
   card.querySelector(".menu-description").textContent = item.description;
-  card.querySelector(".menu-meta").innerHTML = `
-    <span class="menu-note">${getCategoryTitle(item.categoryId)}</span>
-    <span class="menu-note">${item.notes}</span>
-  `;
+
+  const category = getCategoryById(item.categoryId);
+  const metaNotes = [
+    category?.subtitle || "",
+    item.notes || ""
+  ].filter(Boolean);
+
+  card.querySelector(".menu-meta").innerHTML = metaNotes
+    .map((note) => `<span class="menu-note">${note}</span>`)
+    .join("");
 
   card.querySelector(".menu-price").textContent = currency(item.promotionalPrice ?? item.price);
-  const old = card.querySelector(".menu-price-old");
-  old.hidden = !item.promotionalPrice;
-  if (item.promotionalPrice) old.textContent = currency(item.price);
+
+  const oldPrice = card.querySelector(".menu-price-old");
+  oldPrice.hidden = !item.promotionalPrice;
+  if (item.promotionalPrice) {
+    oldPrice.textContent = currency(item.price);
+  }
 
   const action = card.querySelector(".menu-action");
-  if (item.availability === "unavailable") {
-    action.textContent = "Indisponivel";
-    action.href = "#";
-  } else {
-    action.textContent = state.config.operationMode?.includes("salao") ? "Consultar" : "Pedir";
-    action.href = buildWhatsAppItemUrl(item.name);
+  action.href = buildWhatsAppUrl(`Olá! Quero saber mais sobre ${item.name}.`);
+  action.textContent = item.availability === "available" ? "Consultar" : "Indisponível";
+
+  if (item.availability !== "available") {
+    action.removeAttribute("target");
+    action.removeAttribute("rel");
   }
 
   return card;
 }
 
-function buildWhatsAppItemUrl(itemName) {
-  const digits = inferWhatsAppDigits(state.config);
-  if (!digits) return "#";
-  return `https://wa.me/${digits}?text=${encodeURIComponent(`Ola! Quero saber mais sobre "${itemName}" do ${state.config.restaurantName}.`)}`;
+function renderMenu() {
+  refs.menuStage.innerHTML = "";
+
+  const visibleCategories = state.generatedCategories
+    .map((category) => ({
+      ...category,
+      items: state.generatedItems.filter((item) => item.categoryId === category.id && itemMatchesFilters(item))
+    }))
+    .filter((category) => category.items.length > 0);
+
+  refs.emptyState.hidden = visibleCategories.length > 0;
+
+  visibleCategories.forEach((category) => {
+    const section = document.createElement("section");
+    section.className = "menu-section reveal";
+    section.id = `section-${category.id}`;
+    section.dataset.categorySection = category.id;
+    section.innerHTML = `
+      <div class="menu-head">
+        <span class="section-kicker">${category.subtitle || ""}</span>
+        <h2>${category.title}</h2>
+        <p>${category.description || ""}</p>
+      </div>
+      <div class="menu-grid"></div>
+    `;
+
+    const grid = section.querySelector(".menu-grid");
+    category.items.forEach((item) => {
+      grid.appendChild(buildCard(item));
+    });
+
+    refs.menuStage.appendChild(section);
+  });
+
+  attachImageFallbacks(refs.menuStage);
+  setupRevealObserver();
 }
 
 function setupControls() {
@@ -645,8 +721,7 @@ function setupControls() {
   });
 
   refs.categorySelect.addEventListener("change", (event) => {
-    state.filters.category = event.target.value;
-    renderMenu();
+    setCategoryFilter(event.target.value);
   });
 
   refs.specialFilter.addEventListener("change", (event) => {
@@ -655,12 +730,28 @@ function setupControls() {
   });
 
   refs.resetFilters.addEventListener("click", () => {
-    state.filters = { search: "", category: "all", specialOnly: false };
+    state.filters = {
+      search: "",
+      category: "all",
+      specialOnly: false
+    };
     refs.searchInput.value = "";
-    refs.categorySelect.value = "all";
     refs.specialFilter.checked = false;
+    updateCategoryNavigation();
     renderMenu();
   });
+}
+
+function attachImageFallbacks(scope = document) {
+  scope.querySelectorAll("img").forEach((image) => {
+    if (image.dataset.ignoreFallback === "true") return;
+    image.onerror = onImageError;
+  });
+}
+
+function onImageError(event) {
+  event.currentTarget.src = "assets/placeholders/fallback-dish.svg";
+  event.currentTarget.onerror = null;
 }
 
 function setupRevealObserver() {
@@ -674,42 +765,6 @@ function setupRevealObserver() {
   }, { threshold: 0.12 });
 
   document.querySelectorAll(".reveal:not(.is-visible)").forEach((element) => observer.observe(element));
-}
-
-function setupCategorySpy() {
-  const sections = [...document.querySelectorAll("[data-category-section]")];
-  const chips = [...document.querySelectorAll(".category-chip")];
-  if (!sections.length || !chips.length) return;
-
-  const setActive = (id) => {
-    chips.forEach((chip) => chip.classList.toggle("is-active", chip.dataset.categoryId === id));
-    const active = chips.find((chip) => chip.dataset.categoryId === id);
-    if (active) active.scrollIntoView({ inline: "center", block: "nearest" });
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    const best = entries
-      .filter((entry) => entry.isIntersecting)
-      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-    if (best) setActive(best.target.dataset.categorySection);
-  }, {
-    rootMargin: "-18% 0px -62% 0px",
-    threshold: [0.2, 0.45, 0.7]
-  });
-
-  sections.forEach((section) => observer.observe(section));
-  setActive(sections[0].dataset.categorySection);
-}
-
-function attachImageFallbacks(scope = document) {
-  scope.querySelectorAll("img").forEach((image) => {
-    image.onerror = onImageError;
-  });
-}
-
-function onImageError(event) {
-  event.currentTarget.src = "assets/placeholders/fallback-dish.svg";
-  event.currentTarget.onerror = null;
 }
 
 async function init() {
@@ -736,8 +791,8 @@ async function init() {
       <section class="menu-section">
         <div class="menu-head">
           <span class="section-kicker">Erro</span>
-          <h2>Nao foi possivel carregar o cardapio</h2>
-          <p>Verifique se o site esta sendo servido por HTTP e se os arquivos JSON estao acessiveis.</p>
+          <h2>Não foi possível carregar o cardápio</h2>
+          <p>Verifique se os arquivos do projeto estão acessíveis corretamente em hospedagem estática.</p>
         </div>
       </section>
     `;

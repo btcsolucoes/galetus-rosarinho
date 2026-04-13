@@ -4,30 +4,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Galetus | Cardápio</title>
-  <meta name="description" content="Cardápio digital da Galetus Rosarinho.">
+  <meta
+    name="description"
+    content="Cardápio digital da Galetus Rosarinho, com almoço, grill, pizza, chope e especial do dia."
+  >
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  >
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="site-shell">
     <header class="hero reveal" id="top">
       <div class="hero-glow"></div>
+      <div class="hero-rings" aria-hidden="true"></div>
       <div class="container hero-grid">
         <section class="hero-copy">
           <div class="brand-lockup">
             <div class="brand-mark" id="brand-mark" aria-hidden="true"></div>
-            <div>
-              <p class="eyebrow" id="hero-kicker">Rosarinho</p>
-              <h1 id="restaurant-name">Carregando</h1>
-            </div>
+            <p class="eyebrow" id="hero-kicker">Rosarinho • Recife</p>
+            <h1 id="restaurant-name">Galetus</h1>
           </div>
 
           <p class="hero-tagline" id="restaurant-tagline"></p>
           <p class="hero-description" id="restaurant-description"></p>
-
-          <div class="hero-actions" id="hero-actions"></div>
 
           <div class="hero-facts">
             <article class="hero-fact">
@@ -35,44 +38,29 @@
               <strong id="restaurant-address"></strong>
             </article>
             <article class="hero-fact">
-              <span class="fact-label">Contato</span>
+              <span class="fact-label">Horário</span>
               <strong id="restaurant-contact"></strong>
             </article>
           </div>
 
+          <div class="hero-actions" id="hero-actions"></div>
           <div class="hero-badges" id="operation-badges"></div>
         </section>
-
-        <aside class="hero-card">
-          <span class="hero-card-kicker" id="preset-label">Galetus</span>
-          <h2 id="hero-card-title">Churrasco, pizza e salão para reunir.</h2>
-          <p id="hero-card-copy"></p>
-          <div class="hero-card-media">
-            <img id="hero-banner" src="assets/placeholders/banner-generic.svg" alt="Banner principal" loading="eager">
-          </div>
-        </aside>
       </div>
     </header>
 
-    <nav class="sticky-nav">
+    <nav class="sticky-nav" aria-label="Categorias do cardápio">
       <div class="container sticky-nav-inner">
-        <div class="sticky-caption">
-          <span>Navegação</span>
-        </div>
         <div class="category-chips" id="category-chips"></div>
       </div>
     </nav>
 
     <main class="container page">
       <section class="control-panel reveal">
-        <div class="section-head compact">
-          <span class="section-kicker">Busca e filtros</span>
-          <h2>Navegue como um cliente real</h2>
-        </div>
         <div class="control-grid">
           <label class="field field-search">
             <span>Buscar item</span>
-            <input type="search" id="search-input" placeholder="Ex.: burger, pizza, executivo, chopp">
+            <input type="search" id="search-input" placeholder="Ex.: pizza, executivo, burger, chope">
           </label>
 
           <label class="field">
@@ -91,8 +79,8 @@
 
       <section class="special-module reveal" id="daily-special-module" hidden>
         <div class="section-head">
-          <span class="section-kicker" id="daily-special-kicker">Especial do dia</span>
-          <h2 id="daily-special-title">Prato do dia</h2>
+          <span class="section-kicker" id="daily-special-kicker">Rotação diária</span>
+          <h2 id="daily-special-title">Almoço de Hoje</h2>
           <p id="daily-special-copy"></p>
         </div>
         <div class="daily-special-card" id="daily-special-card"></div>
@@ -100,9 +88,9 @@
 
       <section class="highlight-module reveal" id="featured-module" hidden>
         <div class="section-head">
-          <span class="section-kicker">Curadoria comercial</span>
+          <span class="section-kicker">Curadoria da casa</span>
           <h2>Destaques da casa</h2>
-          <p>Seleções pensadas para facilitar a escolha entre almoço, encontro em família e chope com petisco.</p>
+          <p>Seleções pensadas para facilitar a escolha entre almoço, mesa em família e chope com petisco.</p>
         </div>
         <div class="highlight-grid" id="highlight-grid"></div>
       </section>
@@ -122,7 +110,7 @@
       <div class="container footer-grid">
         <div>
           <span class="section-kicker">Institucional</span>
-          <h2 id="footer-name">Restaurante</h2>
+          <h2 id="footer-name">Galetus</h2>
           <p id="footer-address"></p>
           <p id="footer-phone"></p>
         </div>
