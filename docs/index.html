@@ -681,6 +681,7 @@ img{max-width:100%;display:block}
   background:#120b06;
   display:flex;
   align-items:center;
+  contain:paint;
 }
 .photo-category + .category-transition{
   margin-top:-2px;
@@ -693,6 +694,12 @@ img{max-width:100%;display:block}
   background-repeat:no-repeat;
   transform:scale(1.015);
   z-index:0;
+  opacity:0;
+  transition:opacity .35s ease;
+  will-change:opacity;
+}
+.photo-bg.is-loaded{
+  opacity:1;
 }
 .photo-overlay{
   position:absolute;
@@ -765,7 +772,6 @@ img{max-width:100%;display:block}
   background:rgba(255,255,255,.085) !important;
   border-color:rgba(255,255,255,.12) !important;
   box-shadow:0 10px 30px rgba(0,0,0,.16) !important;
-  backdrop-filter:blur(3px);
 }
 .photo-category .dish:hover,
 .photo-category .beb-item:hover,
@@ -1135,6 +1141,31 @@ body{
     width:calc(100% - 20px);
   }
 }
+@media(max-width:1024px),(pointer:coarse){
+  body::before{
+    content:none;
+  }
+  .nav-wrap{
+    backdrop-filter:none;
+    background:rgba(26,16,8,0.98);
+  }
+  .hero-logo,
+  .hero-tagline,
+  .hero-scroll{
+    animation:none;
+  }
+  .photo-overlay{
+    box-shadow:
+      inset 0 24px 42px rgba(0,0,0,.24),
+      inset 0 -24px 42px rgba(0,0,0,.30);
+  }
+  .photo-category .dish,
+  .photo-category .beb-item,
+  .photo-category .galeto-card,
+  .photo-category .dish-featured{
+    box-shadow:0 6px 20px rgba(0,0,0,.12) !important;
+  }
+}
 </style>
 </head>
 <body>
@@ -1222,7 +1253,7 @@ body{
 </article>
 </div>
 </section>
-<section class="photo-category"><div class="photo-bg" style="background-image:url('fotos/pizzas-originais.png')"></div><div class="photo-overlay"></div><div class="photo-inner"><div class="chapter" id="pizzas-originais">
+<section class="photo-category"><div class="photo-bg" data-bg="fotos/pizzas-originais.png"></div><div class="photo-overlay"></div><div class="photo-inner"><div class="chapter" id="pizzas-originais">
 <div class="chapter-num">01</div>
 <div class="chapter-text">
 <span class="chapter-kicker">Forno a lenha</span>
@@ -1247,7 +1278,7 @@ body{
 <div class="dish no-price"><div class="dish-head"><span class="dish-name">Brócolis com Alho</span></div><p class="dish-desc">Mussarela, brócolis refogado com alho no azeite e orégano.</p></div>
 </div>
 </div></div></section>
-<section class="photo-category"><div class="photo-bg" style="background-image:url('fotos/pizzas-tradicionais.png')"></div><div class="photo-overlay"></div><div class="photo-inner"><div class="section-block" id="pizzas-tradicionais">
+<section class="photo-category"><div class="photo-bg" data-bg="fotos/pizzas-tradicionais.png"></div><div class="photo-overlay"></div><div class="photo-inner"><div class="section-block" id="pizzas-tradicionais">
 <div class="section-intro">
 <h3 class="section-subtitle">Tradicionais</h3>
 <div class="section-note">Mais recheio, mais sabor</div>
@@ -1267,7 +1298,7 @@ body{
 <div class="dish no-price"><div class="dish-head"><span class="dish-name">Pepperoni</span></div><p class="dish-desc">Mussarela, pepperoni e orégano.</p></div>
 </div>
 </div></div></section>
-<section class="photo-category"><div class="photo-bg" style="background-image:url('fotos/pizzas-especiais.png')"></div><div class="photo-overlay"></div><div class="photo-inner"><div class="section-block" id="pizzas-especiais">
+<section class="photo-category"><div class="photo-bg" data-bg="fotos/pizzas-especiais.png"></div><div class="photo-overlay"></div><div class="photo-inner"><div class="section-block" id="pizzas-especiais">
 <div class="section-intro">
 <h3 class="section-subtitle">Especiais</h3>
 <div class="section-note">Ingredientes selecionados</div>
@@ -1282,7 +1313,7 @@ body{
 <div class="dish no-price"><div class="dish-head"><span class="dish-name">Americana</span></div><p class="dish-desc">Mussarela, frango desfiado, presunto, calabresa, palmito, bacon, tomate, azeitonas e orégano.</p></div>
 </div>
 </div></div></section>
-<section class="photo-category"><div class="photo-bg" style="background-image:url('fotos/pizzas-doces.png')"></div><div class="photo-overlay"></div><div class="photo-inner"><div class="section-block" id="pizzas-doces">
+<section class="photo-category"><div class="photo-bg" data-bg="fotos/pizzas-doces.png"></div><div class="photo-overlay"></div><div class="photo-inner"><div class="section-block" id="pizzas-doces">
 <div class="section-intro">
 <h3 class="section-subtitle">Pizzas Doces</h3>
 <div class="section-note">Para fechar com sabor</div>
@@ -1295,7 +1326,7 @@ body{
 <div class="dish no-price"><div class="dish-head"><span class="dish-name">Doce de Leite com Paçoca</span></div><p class="dish-desc">Mussarela, doce de leite e paçoca.</p></div>
 </div>
 </div></div></section>
-<section class="photo-category"><div class="photo-bg" style="background-image:url('fotos/pratos-individuais.png')"></div><div class="photo-overlay"></div><div class="photo-inner"><div class="chapter" id="individuais">
+<section class="photo-category"><div class="photo-bg" data-bg="fotos/pratos-individuais.png"></div><div class="photo-overlay"></div><div class="photo-inner"><div class="chapter" id="individuais">
 <div class="chapter-num">02</div>
 <div class="chapter-text">
 <span class="chapter-kicker">Segunda a sexta</span>
@@ -1319,7 +1350,7 @@ body{
 <div class="dish"><div class="dish-head"><span class="dish-name">Filé ao Molho Madeira</span><span class="dish-dots"></span><span class="dish-price">R$ 49</span></div></div>
 </div>
 </div></div></section>
-<section class="photo-category"><div class="photo-bg" style="background-image:url('fotos/petiscos.png')"></div><div class="photo-overlay"></div><div class="photo-inner"><div class="chapter" id="petiscos">
+<section class="photo-category"><div class="photo-bg" data-bg="fotos/petiscos.png"></div><div class="photo-overlay"></div><div class="photo-inner"><div class="chapter" id="petiscos">
 <div class="chapter-num">03</div>
 <div class="chapter-text">
 <span class="chapter-kicker">Para compartilhar</span>
@@ -1348,7 +1379,7 @@ body{
 <div class="dish"><div class="dish-head"><span class="dish-name">Roda Gigante de Picanha</span><span class="dish-dots"></span><span class="dish-price">R$ 149</span></div></div>
 </div>
 </div></div></section>
-<section class="photo-category"><div class="photo-bg" style="background-image:url('fotos/classicos-galetus.png')"></div><div class="photo-overlay"></div><div class="photo-inner"><div class="chapter" id="classicos">
+<section class="photo-category"><div class="photo-bg" data-bg="fotos/classicos-galetus.png"></div><div class="photo-overlay"></div><div class="photo-inner"><div class="chapter" id="classicos">
 <div class="chapter-num">04</div>
 <div class="chapter-text">
 <span class="chapter-kicker">Serve bem 2 pessoas</span>
@@ -1375,7 +1406,7 @@ body{
 <div class="dish"><div class="dish-head"><span class="dish-name">Camarão aos 4 Queijos</span><span class="dish-dots"></span><span class="dish-price">R$ 119</span></div><p class="dish-desc">Espaguete ou arroz branco e batata doce crispy.</p></div>
 </div>
 </div></div></section>
-<section class="photo-category"><div class="photo-bg" style="background-image:url('fotos/pratos-familia.png')"></div><div class="photo-overlay"></div><div class="photo-inner"><div class="chapter" id="familia">
+<section class="photo-category"><div class="photo-bg" data-bg="fotos/pratos-familia.png"></div><div class="photo-overlay"></div><div class="photo-inner"><div class="chapter" id="familia">
 <div class="chapter-num">05</div>
 <div class="chapter-text">
 <span class="chapter-kicker">Serve bem 4 pessoas</span>
@@ -1399,7 +1430,7 @@ body{
 <div class="dish"><div class="dish-head"><span class="dish-name">Super Maminha Importada</span><span class="dish-dots"></span><span class="dish-price">R$ 189</span></div><p class="dish-desc">Feijão sempre verde, arroz branco, bastões de macaxeira, farofa bolão, vinagrete e chimichurri.</p></div>
 </div>
 </div></div></section>
-<section class="photo-category"><div class="photo-bg" style="background-image:url('fotos/galetos.jpg')"></div><div class="photo-overlay"></div><div class="photo-inner"><div class="chapter" id="galetos">
+<section class="photo-category"><div class="photo-bg" data-bg="fotos/galetos.jpg"></div><div class="photo-overlay"></div><div class="photo-inner"><div class="chapter" id="galetos">
 <div class="chapter-num">06</div>
 <div class="chapter-text">
 <span class="chapter-kicker">Carta da casa</span>
@@ -1437,7 +1468,7 @@ body{
 <p class="galeto-desc">Feijão tropeiro, arroz branco, bastões de macaxeira frita, farofa de ovos e vinagrete.</p>
 </div>
 </div></div></section>
-<section class="photo-category"><div class="photo-bg" style="background-image:url('fotos/bebidas.png')"></div><div class="photo-overlay"></div><div class="photo-inner"><div class="chapter" id="bebidas">
+<section class="photo-category"><div class="photo-bg" data-bg="fotos/bebidas.png"></div><div class="photo-overlay"></div><div class="photo-inner"><div class="chapter" id="bebidas">
 <div class="chapter-num">07</div>
 <div class="chapter-text">
 <span class="chapter-kicker">Bar</span>
@@ -1486,7 +1517,7 @@ body{
 <div class="beb-item"><div><span class="beb-name">Whisky 12 Anos</span><span class="beb-note">Litro / Dose</span></div><span class="beb-price">R$ 280 / R$ 20</span></div>
 </div>
 </div></div></section>
-<section class="photo-category"><div class="photo-bg" style="background-image:url('fotos/sobremesas.png')"></div><div class="photo-overlay"></div><div class="photo-inner"><div class="chapter" id="sobremesas">
+<section class="photo-category"><div class="photo-bg" data-bg="fotos/sobremesas.png"></div><div class="photo-overlay"></div><div class="photo-inner"><div class="chapter" id="sobremesas">
 <div class="chapter-num">08</div>
 <div class="chapter-text">
 <span class="chapter-kicker">Finalização</span>
@@ -1536,29 +1567,89 @@ body{
 </footer>
 <script>
 const links=document.querySelectorAll('.nav-inner a');
-const secs=[...links].map(l=>document.querySelector(l.getAttribute('href'))).filter(Boolean);
-const go=()=>{
-  let id=secs[0]?.id;
-  secs.forEach(s=>{if(s.getBoundingClientRect().top<=80)id=s.id});
-  links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+id));
-};
-window.addEventListener('scroll',go,{passive:true});
-go();
+const secs=[...links].map(link=>document.querySelector(link.getAttribute('href'))).filter(Boolean);
 
-const revealTargets=document.querySelectorAll('.quick-picks,.pick-card,.photo-inner,.dish,.galeto-card,.beb-item');
+const updateActiveLink=()=>{
+  const marker=Math.max(80,window.innerHeight*0.18);
+  let id=secs[0]?.id;
+  secs.forEach(section=>{
+    if(section.getBoundingClientRect().top<=marker) id=section.id;
+  });
+  links.forEach(link=>link.classList.toggle('active',link.getAttribute('href')===`#${id}`));
+};
+
+let navTicking=false;
+const queueActiveLinkUpdate=()=>{
+  if(navTicking) return;
+  navTicking=true;
+  requestAnimationFrame(()=>{
+    updateActiveLink();
+    navTicking=false;
+  });
+};
+
+const photoSections=document.querySelectorAll('.photo-category');
+const loadPhotoSection=section=>{
+  if(!section) return;
+  const bg=section.querySelector('.photo-bg[data-bg]');
+  if(!bg || bg.dataset.loaded==='true') return;
+  bg.style.backgroundImage=`url('${bg.dataset.bg}')`;
+  bg.dataset.loaded='true';
+  bg.classList.add('is-loaded');
+};
+
+const hashTarget=window.location.hash ? document.querySelector(window.location.hash)?.closest('.photo-category') : null;
+photoSections.forEach((section,index)=>{
+  if(index<2 || section===hashTarget) loadPhotoSection(section);
+});
+
+links.forEach(link=>{
+  link.addEventListener('click',()=>{
+    const target=document.querySelector(link.getAttribute('href'))?.closest('.photo-category');
+    loadPhotoSection(target);
+    const next=target?.nextElementSibling;
+    if(next?.classList?.contains('photo-category')) loadPhotoSection(next);
+  });
+});
+
 if('IntersectionObserver' in window){
-  const io=new IntersectionObserver(entries=>{
+  const photoObserver=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        loadPhotoSection(entry.target);
+        photoObserver.unobserve(entry.target);
+      }
+    });
+  },{rootMargin:'700px 0px',threshold:0.01});
+  photoSections.forEach((section,index)=>{
+    if(index>=2 && section!==hashTarget) photoObserver.observe(section);
+  });
+}else{
+  photoSections.forEach(loadPhotoSection);
+}
+
+window.addEventListener('scroll',queueActiveLinkUpdate,{passive:true});
+window.addEventListener('resize',queueActiveLinkUpdate);
+queueActiveLinkUpdate();
+
+const liteDevice=window.matchMedia('(max-width: 900px), (pointer: coarse), (prefers-reduced-motion: reduce)').matches;
+const revealTargets=liteDevice
+  ? document.querySelectorAll('.quick-picks,.photo-inner,.footer')
+  : document.querySelectorAll('.quick-picks,.pick-card,.photo-inner');
+
+if(!liteDevice && 'IntersectionObserver' in window){
+  const revealObserver=new IntersectionObserver(entries=>{
     entries.forEach(entry=>{
       if(entry.isIntersecting){
         entry.target.classList.add('in');
-        io.unobserve(entry.target);
+        revealObserver.unobserve(entry.target);
       }
     });
-  },{threshold:0.07});
+  },{threshold:0.08});
   revealTargets.forEach((el,index)=>{
     el.classList.add('fi');
-    el.style.transitionDelay=`${Math.min(index%8*35,210)}ms`;
-    io.observe(el);
+    el.style.transitionDelay=`${Math.min(index%6*30,150)}ms`;
+    revealObserver.observe(el);
   });
 }else{
   revealTargets.forEach(el=>el.classList.add('in'));
