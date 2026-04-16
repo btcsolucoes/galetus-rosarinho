@@ -693,31 +693,6 @@ img{max-width:100%;display:block}
   transform:scale(1.03);
   z-index:0;
 }
-.photo-bg.fit-portrait{
-  overflow:hidden;
-  transform:none;
-  background-size:cover;
-  background-position:center center;
-}
-.photo-bg.fit-portrait::before,
-.photo-bg.fit-portrait::after{
-  content:'';
-  position:absolute;
-  inset:0;
-  background-image:inherit;
-  background-position:center center;
-  background-repeat:no-repeat;
-}
-.photo-bg.fit-portrait::before{
-  inset:-34px;
-  background-size:cover;
-  filter:blur(24px) brightness(.64) saturate(1.05);
-  transform:scale(1.08);
-}
-.photo-bg.fit-portrait::after{
-  background-size:auto 96%;
-  filter:brightness(.98) contrast(1.02);
-}
 .photo-overlay{
   position:absolute;
   inset:0;
@@ -816,9 +791,6 @@ img{max-width:100%;display:block}
   .photo-inner{
     width:calc(100% - 28px);
     padding:64px 0 72px;
-  }
-  .photo-bg.fit-portrait::after{
-    background-size:96% auto;
   }
   .category-transition{height:58px}
 }
@@ -1037,7 +1009,7 @@ body{
 <div class="dish no-price"><div class="dish-head"><span class="dish-name">Doce de Leite com Paçoca</span></div><p class="dish-desc">Mussarela, doce de leite e paçoca.</p></div>
 </div>
 </div></div></section>
-<section class="photo-category"><div class="photo-bg fit-portrait" style="background-image:url('fotos/pratos-individuais.png')"></div><div class="photo-overlay"></div><div class="photo-inner"><div class="chapter" id="individuais">
+<section class="photo-category"><div class="photo-bg" style="background-image:url('fotos/pratos-individuais.png')"></div><div class="photo-overlay"></div><div class="photo-inner"><div class="chapter" id="individuais">
 <div class="chapter-num">02</div>
 <div class="chapter-text">
 <span class="chapter-kicker">Segunda a sexta</span>
@@ -1090,7 +1062,7 @@ body{
 <div class="dish"><div class="dish-head"><span class="dish-name">Roda Gigante de Picanha</span><span class="dish-dots"></span><span class="dish-price">R$ 149</span></div></div>
 </div>
 </div></div></section>
-<section class="photo-category"><div class="photo-bg fit-portrait" style="background-image:url('fotos/classicos-galetus.png')"></div><div class="photo-overlay"></div><div class="photo-inner"><div class="chapter" id="classicos">
+<section class="photo-category"><div class="photo-bg" style="background-image:url('fotos/classicos-galetus.png')"></div><div class="photo-overlay"></div><div class="photo-inner"><div class="chapter" id="classicos">
 <div class="chapter-num">04</div>
 <div class="chapter-text">
 <span class="chapter-kicker">Serve bem 2 pessoas</span>
@@ -1141,7 +1113,7 @@ body{
 <div class="dish"><div class="dish-head"><span class="dish-name">Super Maminha Importada</span><span class="dish-dots"></span><span class="dish-price">R$ 189</span></div><p class="dish-desc">Feijão sempre verde, arroz branco, bastões de macaxeira, farofa bolão, vinagrete e chimichurri.</p></div>
 </div>
 </div></div></section>
-<section class="photo-category"><div class="photo-bg fit-portrait" style="background-image:url('fotos/galetos.png')"></div><div class="photo-overlay"></div><div class="photo-inner"><div class="chapter" id="galetos">
+<section class="photo-category"><div class="photo-bg" style="background-image:url('fotos/galetos.jpg')"></div><div class="photo-overlay"></div><div class="photo-inner"><div class="chapter" id="galetos">
 <div class="chapter-num">06</div>
 <div class="chapter-text">
 <span class="chapter-kicker">Carta da casa</span>
